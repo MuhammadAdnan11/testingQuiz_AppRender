@@ -138,22 +138,30 @@ body.dark {
 /* Quiz Section */
 .quiz-section {
   display: none;
-  background: #ffffff;
   padding: 24px;
   max-width: 700px;
   margin: 20px auto;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  overflow-y: auto;
+  background-color: #ffffff;
+  height: 500px; /* Fixed height */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
+
 
 .quiz-box {
-  background: white;
+  flex: 1;
+  overflow-y: auto;
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
 }
-
 body.dark .quiz-box {
   background: #2e2e2e;
 }
@@ -189,16 +197,9 @@ body.dark .quiz-box {
 }
 
 .option {
-  background: #f0f4ff;
-  border: 1px solid #cfd8ff;
-  padding: 14px 16px;
-  border-radius: 8px;
-  text-align: left;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-  font-size: 16px;
-  line-height: 1.5;
   word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .option:hover {
@@ -254,6 +255,17 @@ body.dark .quiz-box {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+@media screen and (max-width: 768px) {
+  .quiz-section {
+    height: 90vh;
+  }
+
+  .quiz-box {
+    min-height: 100%;
+  }
+}
+
 
 /* Responsive Tweaks */
 @media screen and (max-width: 600px) {
