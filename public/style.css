@@ -681,3 +681,67 @@ label[for="course-select"] {
 #document-links a:hover {
   background-color: #0056b3;
 }
+
+
+
+
+/* 🎯🎯 news area */
+.news-sidebar {
+  position: fixed;
+  top: 100px; /* Adjust as needed */
+  left: 20px;
+  width: 280px;
+  background-color: #f7f9fc;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 2px solid #2563eb;
+  animation: borderGlow 4s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: #2563eb;
+    box-shadow: 0 0 5px rgba(37, 99, 235, 0.5);
+  }
+  50% {
+    border-color: #1e40af;
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.8);
+  }
+}
+
+.news-sidebar h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #1e3a8a;
+}
+
+.news-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.news-sidebar li {
+  margin-bottom: 10px;
+}
+
+.news-sidebar a {
+  text-decoration: none;
+  color: #2563eb;
+  font-size: 14px;
+}
+
+.news-sidebar a:hover {
+  text-decoration: underline;
+}
+
+/* Hide news sidebar on screens smaller than 1024px (adjust as needed) */
+@media (max-width: 1023px) {
+  .news-sidebar {
+    display: none !important;
+  }
+}
