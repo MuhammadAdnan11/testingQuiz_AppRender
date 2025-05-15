@@ -52,7 +52,10 @@
         <select id="course-select">
           <option value="" disabled selected>Select a course</option>
           <option value="ict">ICT</option>
-          <option value="msword">MS Word</option>
+          <option value="ck">Computer Skills</option>
+          <option value="ant">Anatomy</option>
+          <option value="psy">Physiology</option>
+                    <!-- <option value="msword">MS Word</option> -->
           <option value="networking">Networking</option>
         </select>
 
@@ -123,12 +126,16 @@ document.addEventListener('DOMContentLoaded', () => {
       { name: "Network", url: "docs/network.pdf" },
       { name: "Network Topologies", url: "docs/network-topologies.pdf" }
     ],
-    msword: [
-      { name: "MS Word Guide", url: "docs/msword-guide.pdf" }
-    ],
-    networking: [
-      { name: "Networking Basics", url: "docs/networking-basics.pdf" }
+     ck: [
+      { name: "Network", url: "docs/network.pdf" },
+      { name: "Network Topologies", url: "docs/network-topologies.pdf" }
     ]
+    // msword: [
+    //   { name: "MS Word Guide", url: "docs/msword-guide.pdf" }
+    // ],
+    // networking: [
+    //   { name: "Networking Basics", url: "docs/networking-basics.pdf" }
+    // ]
   };
 
   courseSelect.addEventListener("change", function () {
