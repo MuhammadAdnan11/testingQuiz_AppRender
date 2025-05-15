@@ -1732,16 +1732,16 @@ const questionBank =
 },
 //  End 
 //   🎯🎯Anatomy 
- {
+  {
         "course": "ant",
         "numb": 1,
         "question": "The study of the structure of the human body is called:",
-        "answer": "D. Anatomy",
+        "answer": "A. Anatomy",
         "options": [
-            "A. Physiology",
-            "B. Histology",
-            "C. Pathology",
-            "D. Anatomy"
+            "A. Anatomy",
+            "B. Physiology",
+            "C. Histology",
+            "D. Pathology"
         ]
     },
     {
@@ -1750,9 +1750,9 @@ const questionBank =
         "question": "Which branch of anatomy deals with the study of tissues?",
         "answer": "D. Embryology",
         "options": [
-            "A. Gross anatomy",
-            "B. Systemic anatomy",
-            "C. Histology",
+            "A. Systemic anatomy",
+            "B. Histology",
+            "C. Gross anatomy",
             "D. Embryology"
         ]
     },
@@ -1760,72 +1760,72 @@ const questionBank =
         "course": "ant",
         "numb": 3,
         "question": "The term \"anatomy\" is derived from the Greek word meaning:",
-        "answer": "D. To heal",
+        "answer": "A. To heal",
         "options": [
-            "A. To cut apart",
-            "B. To observe",
-            "C. To diagnose",
-            "D. To heal"
+            "A. To heal",
+            "B. To cut apart",
+            "C. To observe",
+            "D. To diagnose"
         ]
     },
     {
         "course": "ant",
         "numb": 4,
         "question": "Which of the following is NOT a sub-discipline of gross anatomy?",
-        "answer": "D. Cytology",
+        "answer": "A. Cytology",
         "options": [
-            "A. Regional anatomy",
-            "B. Surface anatomy",
-            "C. Radiographic anatomy",
-            "D. Cytology"
+            "A. Cytology",
+            "B. Radiographic anatomy",
+            "C. Regional anatomy",
+            "D. Surface anatomy"
         ]
     },
     {
         "course": "ant",
         "numb": 5,
         "question": "The study of the structural changes associated with disease is called:",
-        "answer": "D. Surgical anatomy",
+        "answer": "B. Surgical anatomy",
         "options": [
-            "A. Comparative anatomy",
-            "B. Pathological anatomy",
-            "C. Developmental anatomy",
-            "D. Surgical anatomy"
+            "A. Developmental anatomy",
+            "B. Surgical anatomy",
+            "C. Comparative anatomy",
+            "D. Pathological anatomy"
         ]
     },
     {
         "course": "ant",
         "numb": 6,
         "question": "Which plane divides the body into superior and inferior portions?",
-        "answer": "D. Median",
+        "answer": "B. Median",
         "options": [
             "A. Sagittal",
-            "B. Coronal",
+            "B. Median",
             "C. Transverse",
-            "D. Median"
+            "D. Coronal"
         ]
     },
     {
         "course": "ant",
         "numb": 7,
         "question": "The term \"anterior\" refers to:",
-        "answer": "D. Toward the feet",
+        "answer": "A. Toward the feet",
         "options": [
-            "A. Toward the back",
+            "A. Toward the feet",
             "B. Toward the head",
             "C. Toward the front",
-            "D. Toward the feet"
+            "D. Toward the back"
         ]
     },
     {
         "course": "ant",
         "numb": 8,
         "question": "The heart is located in which body cavity?",
-        "answer": "D. Thoracic cavity",
+        "answer": "B. Thoracic cavity",
         "options": [
             "A. Cranial cavity",
-            "B. Abdominal cavity",
+            "B. Thoracic cavity",
             "C. Pelvic cavity",
-            "D. Thoracic cavity"
+            "D. Abdominal cavity"
         ]
     },
     {
@@ -1834,8 +1834,8 @@ const questionBank =
         "question": "Which of the following is a dorsal body cavity?",
         "answer": "D. Spinal cavity",
         "options": [
-            "A. Thoracic cavity",
-            "B. Abdominal cavity",
+            "A. Abdominal cavity",
+            "B. Thoracic cavity",
             "C. Pelvic cavity",
             "D. Spinal cavity"
         ]
@@ -1846,9 +1846,9 @@ const questionBank =
         "question": "The study of the structure and function of cells is called:",
         "answer": "D. Pathology",
         "options": [
-            "A. Histology",
+            "A. Cytology",
             "B. Embryology",
-            "C. Cytology",
+            "C. Histology",
             "D. Pathology"
         ]
     },
@@ -1856,252 +1856,252 @@ const questionBank =
         "course": "ant",
         "numb": 11,
         "question": "Which term describes a structure closer to the midline of the body?",
-        "answer": "D. Distal",
+        "answer": "B. Distal",
         "options": [
-            "A. Lateral",
-            "B. Proximal",
-            "C. Medial",
-            "D. Distal"
+            "A. Proximal",
+            "B. Distal",
+            "C. Lateral",
+            "D. Medial"
         ]
     },
     {
         "course": "ant",
         "numb": 12,
         "question": "The elbow is ___ to the wrist.",
-        "answer": "D. Superficial",
+        "answer": "B. Superficial",
         "options": [
             "A. Distal",
-            "B. Inferior",
+            "B. Superficial",
             "C. Proximal",
-            "D. Superficial"
+            "D. Inferior"
         ]
     },
     {
         "course": "ant",
         "numb": 13,
         "question": "The anatomical position is characterized by:",
-        "answer": "D. Standing erect, palms facing forward",
+        "answer": "B. Standing erect, palms facing forward",
         "options": [
-            "A. Palms facing backward",
-            "B. Arms crossed over the chest",
-            "C. Body lying down",
-            "D. Standing erect, palms facing forward"
+            "A. Body lying down",
+            "B. Standing erect, palms facing forward",
+            "C. Palms facing backward",
+            "D. Arms crossed over the chest"
         ]
     },
     {
         "course": "ant",
         "numb": 14,
         "question": "Which of the following is NOT a fundamental plane of the body?",
-        "answer": "D. Transverse",
+        "answer": "B. Transverse",
         "options": [
-            "A. Sagittal",
-            "B. Coronal",
-            "C. Oblique",
-            "D. Transverse"
+            "A. Oblique",
+            "B. Transverse",
+            "C. Coronal",
+            "D. Sagittal"
         ]
     },
     {
         "course": "ant",
         "numb": 15,
         "question": "The study of the development of an individual from fertilization to birth is called:",
-        "answer": "D. Gerontology",
+        "answer": "C. Gerontology",
         "options": [
-            "A. Histology",
-            "B. Embryology",
-            "C. Cytology",
-            "D. Gerontology"
+            "A. Embryology",
+            "B. Cytology",
+            "C. Gerontology",
+            "D. Histology"
         ]
     },
     {
         "course": "ant",
         "numb": 16,
         "question": "The term \"superficial\" refers to structures that are:",
-        "answer": "D. Inside an organ",
+        "answer": "A. Inside an organ",
         "options": [
-            "A. Near the center of the body",
-            "B. Away from the body surface",
-            "C. On the body surface",
-            "D. Inside an organ"
+            "A. Inside an organ",
+            "B. Near the center of the body",
+            "C. Away from the body surface",
+            "D. On the body surface"
         ]
     },
     {
         "course": "ant",
         "numb": 17,
         "question": "The diaphragm separates which two body cavities?",
-        "answer": "D. Dorsal and ventral",
+        "answer": "A. Dorsal and ventral",
         "options": [
-            "A. Thoracic and abdominal",
+            "A. Dorsal and ventral",
             "B. Cranial and spinal",
-            "C. Pelvic and abdominal",
-            "D. Dorsal and ventral"
+            "C. Thoracic and abdominal",
+            "D. Pelvic and abdominal"
         ]
     },
     {
         "course": "ant",
         "numb": 18,
         "question": "The study of large body structures visible to the naked eye is called:",
-        "answer": "D. Radiographic anatomy",
+        "answer": "A. Radiographic anatomy",
         "options": [
-            "A. Microscopic anatomy",
+            "A. Radiographic anatomy",
             "B. Gross anatomy",
-            "C. Developmental anatomy",
-            "D. Radiographic anatomy"
+            "C. Microscopic anatomy",
+            "D. Developmental anatomy"
         ]
     },
     {
         "course": "ant",
         "numb": 19,
         "question": "Which of the following is NOT a characteristic of living organisms?",
-        "answer": "D. Decomposition",
+        "answer": "B. Decomposition",
         "options": [
             "A. Metabolism",
-            "B. Reproduction",
+            "B. Decomposition",
             "C. Homeostasis",
-            "D. Decomposition"
+            "D. Reproduction"
         ]
     },
     {
         "course": "ant",
         "numb": 20,
         "question": "The term \"distal\" is used to describe a structure that is:",
-        "answer": "D. On the opposite side",
+        "answer": "A. On the opposite side",
         "options": [
-            "A. Closer to the point of attachment",
-            "B. Farther from the point of attachment",
-            "C. Near the midline",
-            "D. On the opposite side"
+            "A. On the opposite side",
+            "B. Closer to the point of attachment",
+            "C. Farther from the point of attachment",
+            "D. Near the midline"
         ]
     },
     {
         "course": "ant",
         "numb": 21,
         "question": "The spleen is located in which abdominopelvic quadrant?",
-        "answer": "D. Left lower quadrant",
+        "answer": "C. Left lower quadrant",
         "options": [
             "A. Right upper quadrant",
             "B. Left upper quadrant",
-            "C. Right lower quadrant",
-            "D. Left lower quadrant"
+            "C. Left lower quadrant",
+            "D. Right lower quadrant"
         ]
     },
     {
         "course": "ant",
         "numb": 22,
         "question": "Which of the following imaging techniques uses X-rays to produce images?",
-        "answer": "D. PET scan",
+        "answer": "A. PET scan",
         "options": [
-            "A. MRI",
+            "A. PET scan",
             "B. Ultrasound",
-            "C. CT scan",
-            "D. PET scan"
+            "C. MRI",
+            "D. CT scan"
         ]
     },
     {
         "course": "ant",
         "numb": 23,
         "question": "The study of the function of body structures is called:",
-        "answer": "D. Embryology",
+        "answer": "C. Embryology",
         "options": [
-            "A. Anatomy",
-            "B. Physiology",
-            "C. Histology",
-            "D. Embryology"
+            "A. Histology",
+            "B. Anatomy",
+            "C. Embryology",
+            "D. Physiology"
         ]
     },
     {
         "course": "ant",
         "numb": 24,
         "question": "The term \"ventral\" refers to which body surface?",
-        "answer": "D. Top",
+        "answer": "A. Top",
         "options": [
-            "A. Back",
+            "A. Top",
             "B. Front",
-            "C. Side",
-            "D. Top"
+            "C. Back",
+            "D. Side"
         ]
     },
     {
         "course": "ant",
         "numb": 25,
         "question": "The appendix is located in which abdominopelvic region?",
-        "answer": "D. Right iliac",
+        "answer": "B. Right iliac",
         "options": [
-            "A. Epigastric",
-            "B. Hypochondriac",
-            "C. Umbilical",
-            "D. Right iliac"
+            "A. Umbilical",
+            "B. Right iliac",
+            "C. Hypochondriac",
+            "D. Epigastric"
         ]
     },
     {
         "course": "ant",
         "numb": 26,
         "question": "Which of the following is NOT a type of tissue in the human body?",
-        "answer": "D. Vascular",
+        "answer": "A. Vascular",
         "options": [
-            "A. Epithelial",
-            "B. Connective",
-            "C. Muscular",
-            "D. Vascular"
+            "A. Vascular",
+            "B. Muscular",
+            "C. Epithelial",
+            "D. Connective"
         ]
     },
     {
         "course": "ant",
         "numb": 27,
         "question": "The term \"homeostasis\" refers to:",
-        "answer": "D. Structural abnormalities",
+        "answer": "C. Structural abnormalities",
         "options": [
-            "A. Breakdown of tissues",
+            "A. Rapid cell division",
             "B. Maintenance of stable internal conditions",
-            "C. Rapid cell division",
-            "D. Structural abnormalities"
+            "C. Structural abnormalities",
+            "D. Breakdown of tissues"
         ]
     },
     {
         "course": "ant",
         "numb": 28,
         "question": "Which body system is responsible for producing movement?",
-        "answer": "D. Integumentary system",
+        "answer": "B. Integumentary system",
         "options": [
-            "A. Nervous system",
-            "B. Endocrine system",
-            "C. Muscular system",
-            "D. Integumentary system"
+            "A. Muscular system",
+            "B. Integumentary system",
+            "C. Nervous system",
+            "D. Endocrine system"
         ]
     },
     {
         "course": "ant",
         "numb": 29,
         "question": "The smallest living unit of an organism is:",
-        "answer": "D. Molecule",
+        "answer": "C. Molecule",
         "options": [
-            "A. Tissue",
+            "A. Cell",
             "B. Organ",
-            "C. Cell",
-            "D. Molecule"
+            "C. Molecule",
+            "D. Tissue"
         ]
     },
     {
         "course": "ant",
         "numb": 30,
         "question": "The study of the structure of the nervous system is called:",
-        "answer": "D. Endocrinology",
+        "answer": "C. Endocrinology",
         "options": [
             "A. Cardiology",
             "B. Neurology",
-            "C. Nephrology",
-            "D. Endocrinology"
+            "C. Endocrinology",
+            "D. Nephrology"
         ]
     },
     {
         "course": "ant",
         "numb": 31,
         "question": "The term \"inferior\" means:",
-        "answer": "D. Away from the midline",
+        "answer": "C. Away from the midline",
         "options": [
-            "A. Above",
+            "A. Toward the midline",
             "B. Below",
-            "C. Toward the midline",
-            "D. Away from the midline"
+            "C. Away from the midline",
+            "D. Above"
         ]
     },
     {
@@ -2110,9 +2110,9 @@ const questionBank =
         "question": "The liver is primarily located in which abdominopelvic region?",
         "answer": "D. Right iliac",
         "options": [
-            "A. Left hypochondriac",
+            "A. Left lumbar",
             "B. Right hypochondriac",
-            "C. Left lumbar",
+            "C. Left hypochondriac",
             "D. Right iliac"
         ]
     },
@@ -2120,12 +2120,12 @@ const questionBank =
         "course": "ant",
         "numb": 33,
         "question": "Which of the following is NOT a function of the skeletal system?",
-        "answer": "D. Blood cell formation",
+        "answer": "C. Blood cell formation",
         "options": [
-            "A. Protection",
-            "B. Movement",
-            "C. Hormone production",
-            "D. Blood cell formation"
+            "A. Movement",
+            "B. Hormone production",
+            "C. Blood cell formation",
+            "D. Protection"
         ]
     },
     {
@@ -2134,9 +2134,9 @@ const questionBank =
         "question": "The study of how anatomical structures change over time is called:",
         "answer": "D. Pathological anatomy",
         "options": [
-            "A. Comparative anatomy",
-            "B. Developmental anatomy",
-            "C. Radiographic anatomy",
+            "A. Radiographic anatomy",
+            "B. Comparative anatomy",
+            "C. Developmental anatomy",
             "D. Pathological anatomy"
         ]
     },
@@ -2144,36 +2144,36 @@ const questionBank =
         "course": "ant",
         "numb": 35,
         "question": "The term \"lateral\" refers to a position:",
-        "answer": "D. Deep inside",
+        "answer": "C. Deep inside",
         "options": [
             "A. Toward the midline",
             "B. Away from the midline",
-            "C. Near the surface",
-            "D. Deep inside"
+            "C. Deep inside",
+            "D. Near the surface"
         ]
     },
     {
         "course": "ant",
         "numb": 36,
         "question": "The kidneys are located in which body cavity?",
-        "answer": "D. Cranial",
+        "answer": "A. Cranial",
         "options": [
-            "A. Thoracic",
-            "B. Abdominal",
-            "C. Pelvic",
-            "D. Cranial"
+            "A. Cranial",
+            "B. Pelvic",
+            "C. Abdominal",
+            "D. Thoracic"
         ]
     },
     {
         "course": "ant",
         "numb": 37,
         "question": "Which of the following is NOT a component of the integumentary system?",
-        "answer": "D. Tendons",
+        "answer": "A. Tendons",
         "options": [
-            "A. Skin",
-            "B. Hair",
-            "C. Nails",
-            "D. Tendons"
+            "A. Tendons",
+            "B. Nails",
+            "C. Hair",
+            "D. Skin"
         ]
     },
     {
@@ -2182,9 +2182,9 @@ const questionBank =
         "question": "The study of the structure of the heart is called:",
         "answer": "D. Pulmonology",
         "options": [
-            "A. Neurology",
-            "B. Cardiology",
-            "C. Nephrology",
+            "A. Cardiology",
+            "B. Nephrology",
+            "C. Neurology",
             "D. Pulmonology"
         ]
     },
@@ -2192,84 +2192,84 @@ const questionBank =
         "course": "ant",
         "numb": 39,
         "question": "The term \"proximal\" is used to describe a structure that is:",
-        "answer": "D. On the opposite side",
+        "answer": "C. On the opposite side",
         "options": [
-            "A. Farther from the point of attachment",
-            "B. Closer to the point of attachment",
-            "C. Near the midline",
-            "D. On the opposite side"
+            "A. Closer to the point of attachment",
+            "B. Farther from the point of attachment",
+            "C. On the opposite side",
+            "D. Near the midline"
         ]
     },
     {
         "course": "ant",
         "numb": 40,
         "question": "The lungs are located in which body cavity?",
-        "answer": "D. Pelvic",
+        "answer": "A. Pelvic",
         "options": [
-            "A. Cranial",
-            "B. Thoracic",
-            "C. Abdominal",
-            "D. Pelvic"
+            "A. Pelvic",
+            "B. Abdominal",
+            "C. Thoracic",
+            "D. Cranial"
         ]
     },
     {
         "course": "ant",
         "numb": 41,
         "question": "Which of the following is NOT a part of the axial skeleton?",
-        "answer": "D. Femur",
+        "answer": "B. Femur",
         "options": [
-            "A. Skull",
-            "B. Vertebral column",
-            "C. Ribs",
-            "D. Femur"
+            "A. Vertebral column",
+            "B. Femur",
+            "C. Skull",
+            "D. Ribs"
         ]
     },
     {
         "course": "ant",
         "numb": 42,
         "question": "The study of the structure of the kidneys is called:",
-        "answer": "D. Endocrinology",
+        "answer": "C. Endocrinology",
         "options": [
-            "A. Cardiology",
-            "B. Neurology",
-            "C. Nephrology",
-            "D. Endocrinology"
+            "A. Nephrology",
+            "B. Cardiology",
+            "C. Endocrinology",
+            "D. Neurology"
         ]
     },
     {
         "course": "ant",
         "numb": 43,
         "question": "The term \"deep\" refers to structures that are:",
-        "answer": "D. On the opposite side",
+        "answer": "C. On the opposite side",
         "options": [
-            "A. Near the surface",
+            "A. Toward the midline",
             "B. Away from the surface",
-            "C. Toward the midline",
-            "D. On the opposite side"
+            "C. On the opposite side",
+            "D. Near the surface"
         ]
     },
     {
         "course": "ant",
         "numb": 44,
         "question": "The stomach is located in which abdominopelvic region?",
-        "answer": "D. Right lumbar",
+        "answer": "C. Right lumbar",
         "options": [
             "A. Epigastric",
             "B. Hypogastric",
-            "C. Left iliac",
-            "D. Right lumbar"
+            "C. Right lumbar",
+            "D. Left iliac"
         ]
     },
     {
         "course": "ant",
         "numb": 45,
         "question": "Which of the following is NOT a function of the muscular system?",
-        "answer": "D. Oxygen transport",
+        "answer": "C. Oxygen transport",
         "options": [
-            "A. Movement",
+            "A. Heat production",
             "B. Posture maintenance",
-            "C. Heat production",
-            "D. Oxygen transport"
+            "C. Oxygen transport",
+            "D. Movement"
         ]
     },
     {
@@ -2278,8 +2278,8 @@ const questionBank =
         "question": "The study of the structure of body parts and their relationships is called:",
         "answer": "D. Embryology",
         "options": [
-            "A. Physiology",
-            "B. Anatomy",
+            "A. Anatomy",
+            "B. Physiology",
             "C. Histology",
             "D. Embryology"
         ]
@@ -2300,12 +2300,12 @@ const questionBank =
         "course": "ant",
         "numb": 48,
         "question": "The urinary bladder is located in which body cavity?",
-        "answer": "D. Cranial",
+        "answer": "A. Cranial",
         "options": [
-            "A. Thoracic",
-            "B. Abdominal",
+            "A. Cranial",
+            "B. Thoracic",
             "C. Pelvic",
-            "D. Cranial"
+            "D. Abdominal"
         ]
     },
     {
@@ -2314,9 +2314,9 @@ const questionBank =
         "question": "Which of the following is NOT a characteristic of epithelial tissue?",
         "answer": "D. Polarity",
         "options": [
-            "A. Avascular",
+            "A. Abundant extracellular matrix",
             "B. High regeneration capacity",
-            "C. Abundant extracellular matrix",
+            "C. Avascular",
             "D. Polarity"
         ]
     },
@@ -2324,12 +2324,12 @@ const questionBank =
         "course": "ant",
         "numb": 50,
         "question": "The study of the structure of bones is called:",
-        "answer": "D. Angiology",
+        "answer": "C. Angiology",
         "options": [
-            "A. Myology",
-            "B. Osteology",
-            "C. Arthrology",
-            "D. Angiology"
+            "A. Arthrology",
+            "B. Myology",
+            "C. Angiology",
+            "D. Osteology"
         ]
     },
 
