@@ -107,69 +107,6 @@
 
   <script src="questions.js"></script>
 
-  <!-- Menu toggle script -->
-  <!-- <script>
-    document.getElementById("menu-toggle").addEventListener("click", () => {
-      const navbar = document.querySelector(".navbar");
-      navbar.classList.toggle("active");
-    });
-  </script> -->
-
-  <!-- Main logic -->
-  <!-- <script>
-    const documentsBySubject = {
-      ict: [
-        { name: "ICT Notes", url: "docs/ict-notes.pdf" },
-        { name: "ICT Syllabus", url: "docs/ict-syllabus.pdf" },
-      ],
-      msword: [
-        { name: "MS Word Guide", url: "docs/msword-guide.pdf" },
-      ],
-      networking: [
-        { name: "Networking Basics", url: "docs/networking-basics.pdf" },
-      ]
-    };
-
-    const courseSelect = document.getElementById("course-select");
-    const documentSection = document.getElementById("document-section");
-    const documentLinks = document.getElementById("document-links");
-
-    courseSelect.addEventListener("change", function () {
-      const selected = this.value;
-      documentLinks.innerHTML = "";
-
-      if (documentsBySubject[selected]) {
-        documentsBySubject[selected].forEach(doc => {
-          const li = document.createElement("li");
-          const link = document.createElement("a");
-          link.href = doc.url;
-          link.download = "";
-          link.textContent = doc.name;
-          li.appendChild(link);
-          documentLinks.appendChild(li);
-        });
-        documentSection.style.display = "block";
-      } else {
-        documentSection.style.display = "none";
-      }
-    });
-
-    document.getElementById("start-quiz-btn").addEventListener("click", function () {
-      const selectedCourse = courseSelect.value;
-      if (!selectedCourse) {
-        alert("Please select a course before starting the quiz.");
-        return;
-      }
-
-      // Hide home, show quiz
-      document.getElementById("home-section").style.display = "none";
-      document.querySelector(".quiz-section").style.display = "block";
-      document.getElementById("selected-course-label").textContent = selectedCourse.toUpperCase();
-      documentSection.style.display = "none";
-    });
-  </script> -->
-
-
   <script>
 document.addEventListener('DOMContentLoaded', () => {
   // Hamburger menu toggle
@@ -183,8 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const documentsBySubject = {
     ict: [
-      { name: "ICT Notes", url: "docs/ict-notes.pdf" },
-      { name: "ICT Syllabus", url: "docs/ict-syllabus.pdf" }
+      { name: "Network", url: "docs/Network.pdf" },
+      { name: "Network Topologies", url: "docs/Network-Topologies.pdf" }
     ],
     msword: [
       { name: "MS Word Guide", url: "docs/msword-guide.pdf" }
