@@ -1,12 +1,5 @@
 const mongoose = require('mongoose');
 
-// User Schema
-const userSchema = new mongoose.Schema({
-  fullName: String,
-  email: { type: String, unique: true },
-  password: String
-});
-
 // Quiz Attempt Schema
 const quizAttemptSchema = new mongoose.Schema({
   subject: String,
@@ -17,11 +10,13 @@ const quizAttemptSchema = new mongoose.Schema({
   }
 });
 
-// Export both models
-const User = mongoose.model('User', userSchema);
-const QuizAttempt = mongoose.model('QuizAttempt', quizAttemptSchema);
+// User Schema
+const userSchema = new mongoose.Schema({
+  fullName: String,
+  email: { type: String, unique: true },
+  password: String,
+  quizAttempts: [quizAttemptSchema]  // ✅ Add this line
+});
 
-module.exports = {
-  User,
-  QuizAttempt
-};
+// Export model
+module.exports = mongoose.model('User', userSchema);
