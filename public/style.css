@@ -140,6 +140,7 @@ body.dark {
 
 /* Quiz Section */
 .quiz-section {
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,6 +152,7 @@ body.dark {
 
 .quiz-box {
   background: white;
+margin: auto;
   padding: 1rem;
   max-width: 600px;
   width: 100%;
