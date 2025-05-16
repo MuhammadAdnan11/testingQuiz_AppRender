@@ -89,9 +89,6 @@ app.get('/score-history/:email', async (req, res) => {
 });
 
 
-
-
-
 app.post('/submit-score', async (req, res) => {
   const { email, subject, score } = req.body;
 
@@ -99,12 +96,13 @@ app.post('/submit-score', async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).send({ error: 'User not found' });
 
-    user.quizAttempts.push({ subject, score }); // ← This adds a new attempt
+    // ✅ Push new score into quizAttempts
+    user.quizAttempts.push({ subject, score });
     await user.save();
 
     res.send({ message: 'Score saved' });
   } catch (error) {
-    console.error(error);
+    console.error('Submit score error:', error);
     res.status(500).send({ error: 'Failed to save score' });
   }
 });
@@ -112,6 +110,25 @@ app.post('/submit-score', async (req, res) => {
 
 
 // app.post('/submit-score', async (req, res) => {
+//   const { email, subject, score } = req.body;
+
+//   try {
+//     const user = await User.findOne({ email });
+//     if (!user) return res.status(404).send({ error: 'User not found' });
+
+//     user.quizAttempts.push({ subject, score }); // ← This adds a new attempt
+//     await user.save();
+
+//     res.send({ message: 'Score saved' });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send({ error: 'Failed to save score' });
+//   }
+// });
+
+
+
+
 //   const { email, subject, score } = req.body;
 
 //   try {

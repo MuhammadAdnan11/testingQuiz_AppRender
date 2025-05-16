@@ -1,112 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Score Report</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz Report</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 30px;
-      background-color: #f9f9f9;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
       text-align: center;
     }
-    h1 {
-      color: #333;
-    }
-    canvas {
-      max-width: 800px;
-      margin: 30px auto;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      padding: 10px;
+    #chartContainer {
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
     }
   </style>
 </head>
 <body>
-  <h1>Your Quiz Score Report</h1>
-  <canvas id="scoreChart" width="800" height="400"></canvas>
+  <h1>Your Quiz Report</h1>
+  <div id="chartContainer">
+    <canvas id="scoreChart"></canvas>
+  </div>
 
   <script>
-    const userEmail = localStorage.getItem('userEmail');
+    // Get user email from localStorage
+    const userEmail = localStorage.getItem("userEmail");
 
-    fetch(`/score-history/${userEmail}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch score history');
-        return res.json();
-      })
-      .then(data => {
-        const attempts = data.quizAttempts;
-        if (!attempts || !attempts.length) {
-          alert("No quiz attempts found.");
-          return;
-        }
-
-        // Group scores by subject
-        const subjectScores = {};
-        const maxAttempts = {};
-
-        attempts.forEach(({ subject, score }, index) => {
-          if (!subjectScores[subject]) {
-            subjectScores[subject] = [];
-            maxAttempts[subject] = 0;
+    if (!userEmail) {
+      alert("You must be logged in to view your report.");
+      window.location.href = "login.html"; // Redirect to login if no email
+    } else {
+      fetch(`/score-history/${encodeURIComponent(userEmail)}`)
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch score history");
+          return res.json();
+        })
+        .then((data) => {
+          const attempts = data.quizAttempts;
+          if (!attempts || attempts.length === 0) {
+            alert("No quiz attempts found.");
+            return;
           }
-          subjectScores[subject].push(score);
-          maxAttempts[subject]++;
-        });
 
-        // Labels = max length of any subject's scores
-        const labels = Array.from({ length: Math.max(...Object.values(maxAttempts)) }, (_, i) => `Attempt ${i + 1}`);
+          // Prepare data for the chart
+          // Group by subject, get highest score per subject (optional)
+          const subjectScores = {};
+          attempts.forEach(({ subject, score }) => {
+            if (!subjectScores[subject] || score > subjectScores[subject]) {
+              subjectScores[subject] = score;
+            }
+          });
 
-        const datasets = Object.entries(subjectScores).map(([subject, scores]) => ({
-          label: subject,
-          data: scores,
-          borderColor: getRandomColor(),
-          fill: false,
-          tension: 0.3
-        }));
+          // Extract labels and data
+          const labels = Object.keys(subjectScores);
+          const scores = Object.values(subjectScores);
 
-        const ctx = document.getElementById('scoreChart').getContext('2d');
-
-        new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: labels,
-            datasets: datasets
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              title: {
-                display: true,
-                text: 'Quiz Scores by Subject'
-              }
+          // Create the chart
+          const ctx = document.getElementById("scoreChart").getContext("2d");
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: labels,
+              datasets: [{
+                label: "Highest Score per Subject",
+                data: scores,
+                borderColor: "rgba(75, 192, 192, 1)",
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                fill: true,
+                tension: 0.3,
+                pointRadius: 5,
+                pointHoverRadius: 7
+              }]
             },
-            scales: {
-              y: {
-                beginAtZero: true,
-                title: {
-                  display: true,
-                  text: 'Score'
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 10, // Adjust according to max quiz score
+                  title: {
+                    display: true,
+                    text: "Score"
+                  }
+                },
+                x: {
+                  title: {
+                    display: true,
+                    text: "Subject"
+                  }
                 }
               },
-              x: {
-                title: {
+              plugins: {
+                legend: {
                   display: true,
-                  text: 'Attempts'
+                  position: "top"
+                },
+                tooltip: {
+                  enabled: true
                 }
               }
             }
-          }
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching report data:", error);
+          alert("Error loading report data. Please try again later.");
         });
-      })
-      .catch(err => {
-        console.error('Error loading score history:', err);
-        alert('Could not load your report. Try again later.');
-      });
-
-    function getRandomColor() {
-      return `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`;
     }
   </script>
 </body>

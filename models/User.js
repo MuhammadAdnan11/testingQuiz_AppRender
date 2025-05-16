@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
   fullName: String,
   email: { type: String, unique: true },
   password: String,
-  quizAttempts: [quizAttemptSchema] // ← This line is critical
+  quizAttempts: [quizAttemptSchema] // ✅ This is important
 });
 
 module.exports = mongoose.model('User', userSchema);
