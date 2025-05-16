@@ -7,36 +7,34 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 900px;
+      max-width: 800px;
       margin: 40px auto;
       padding: 20px;
       text-align: center;
     }
-    h2 {
-      margin-top: 40px;
-    }
     table {
-      width: 100%;
+      width: 90%;
+      margin: 20px auto;
       border-collapse: collapse;
-      margin: 20px 0 40px 0;
     }
     th, td {
-      padding: 10px 15px;
       border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
     }
     th {
-      background-color: #f4f4f4;
+      background-color: #c40094;
+      color: white;
     }
-    tr:nth-child(even) {
-      background-color: #fafafa;
+    h2 {
+      margin-top: 40px;
+      color: #c40094;
     }
   </style>
 </head>
 <body>
   <h1>Your Quiz Report</h1>
-  <div id="reportContainer">
-    <!-- Subject tables go here -->
-  </div>
+  <div id="reportContainer"></div>
 
   <script>
     const userEmail = localStorage.getItem("userEmail");
@@ -57,64 +55,58 @@
             return;
           }
 
-          // Group attempts by subject, sort by date desc, limit 4 per subject
-          const grouped = {};
-          attempts.forEach(a => {
-            if (!grouped[a.subject]) grouped[a.subject] = [];
-            grouped[a.subject].push({
-              ...a,
-              dateObj: new Date(a.date)
-            });
-          });
+          // Group attempts by subject
+          const grouped = attempts.reduce((acc, curr) => {
+            if (!acc[curr.subject]) acc[curr.subject] = [];
+            acc[curr.subject].push(curr);
+            return acc;
+          }, {});
 
-          // Sort each subject's attempts descending by date, keep max 4
+          // For each subject keep only 4 most recent attempts (by date desc)
           Object.keys(grouped).forEach(subject => {
-            grouped[subject].sort((a, b) => b.dateObj - a.dateObj);
-            grouped[subject] = grouped[subject].slice(0, 4);
+            grouped[subject].sort((a,b) => new Date(b.date) - new Date(a.date));
+            grouped[subject] = grouped[subject].slice(0,4);
           });
 
-          const allSubjects = Object.keys(grouped).sort();
+          // Build tables for each subject
+          const container = document.getElementById("reportContainer");
+          container.innerHTML = '';
 
-          // How many subjects to show each time (you can change this)
-          const subjectsPerPage = 2;
+          Object.entries(grouped).forEach(([subject, attempts]) => {
+            const section = document.createElement('section');
 
-          // Get last shown start index from localStorage, default 0
-          let startIndex = parseInt(localStorage.getItem('reportStartIndex')) || 0;
+            const title = document.createElement('h2');
+            title.textContent = subject;
+            section.appendChild(title);
 
-          // Get the subjects slice to display now
-          const subjectsToShow = [];
-          for(let i = 0; i < subjectsPerPage; i++) {
-            subjectsToShow.push(allSubjects[(startIndex + i) % allSubjects.length]);
-          }
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
 
-          // Save new startIndex for next time (rotate)
-          startIndex = (startIndex + subjectsPerPage) % allSubjects.length;
-          localStorage.setItem('reportStartIndex', startIndex);
-
-          // Build HTML tables for these subjects
-          let html = '';
-          subjectsToShow.forEach(subject => {
-            const attemptsForSubject = grouped[subject];
-            html += `<h2>Subject: ${subject}</h2>`;
-            html += `
-              <table>
-                <thead>
-                  <tr>
-                    <th>Score</th>
-                    <th>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
+            // Table header
+            thead.innerHTML = `
+              <tr>
+                <th>Attempt Date</th>
+                <th>Score</th>
+              </tr>
             `;
 
-            attemptsForSubject.forEach(a => {
-              html += `<tr><td>${a.score}</td><td>${a.dateObj.toLocaleString()}</td></tr>`;
+            // Table body rows
+            attempts.forEach(({ date, score }) => {
+              const row = document.createElement('tr');
+              const formattedDate = new Date(date).toLocaleString();
+              row.innerHTML = `
+                <td>${formattedDate}</td>
+                <td>${score}</td>
+              `;
+              tbody.appendChild(row);
             });
 
-            html += '</tbody></table>';
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            section.appendChild(table);
+            container.appendChild(section);
           });
-
-          document.getElementById('reportContainer').innerHTML = html;
         })
         .catch(error => {
           console.error("Error fetching report data:", error);

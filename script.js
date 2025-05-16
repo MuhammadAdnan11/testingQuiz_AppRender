@@ -16,121 +16,56 @@ let userScore = 0;
 const nextBtn = document.querySelector('.next-btn');
 const optionsList = document.querySelector('.option-list');
 
-
 function getRandomQuestionsFromCourse(course, limit = 10) {
   const filtered = questionBank.filter(q => q.course === course);
   const shuffled = [...filtered].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, limit);
 }
 
+document.getElementById('startQuizBtn').addEventListener('click', function () {
+  const courseSelected = document.getElementById('courseSelect').value;
 
+  if (!courseSelected) {
+    alert('Please select a course before starting the quiz.');
+    document.getElementById('homePage').style.display = 'block';
+    document.getElementById('startQuizBtn').style.display = 'block';
+    document.getElementById('quizSection').style.display = 'none';
+  } else {
+    localStorage.setItem("selectedSubject", courseSelected); // Save subject for report
 
+    document.getElementById('homePage').style.display = 'none';
+    document.getElementById('startQuizBtn').style.display = 'none';
+    document.getElementById('quizSection').style.display = 'block';
 
-// Start button opens quiz popup
-// startBtn.onclick = () => {
-//   popupInfo.classList.add('active');
-//   main.classList.add('active');
-// };
+    questions = getRandomQuestionsFromCourse(courseSelected, 10);
+    questionCount = 0;
+    questionNumb = 1;
+    userScore = 0;
 
+    if (!questions.length) {
+      alert("No questions found for selected course.");
+      return;
+    }
 
-// startBtn.addEventListener("click", () => {
-//   const courseDropdown = document.getElementById("course-select");
-//   selectedCourse = courseDropdown.value;
+    showQuestions(questionCount);
+    questionCounter(questionNumb);
+    headerScore();
+  }
+});
 
-//   if (!selectedCourse) {
-//     alert("Please select a course to begin the quiz.");
-//     return;
-//   }
-
-//   questions = getRandomQuestionsFromCourse(selectedCourse, 10);
-
-//   if (questions.length === 0) {
-//     alert("No questions found for selected course.");
-//     return;
-//   }
-
-//   document.getElementById("home-section").style.display = "none";
-//   quizSection.style.display = "block";
-
-//   questionIndex = 0;
-//   userScore = 0;
-//   totalQuestionEls.forEach(el => el.textContent = questions.length);
-//   showQuestion(questionIndex);
-//   updateProgressBar(questionIndex);
-// });
-
-
- // JavaScript code for handling the Start Quiz button click
-    document.getElementById('startQuizBtn').addEventListener('click', function () {
-      const courseSelected = document.getElementById('courseSelect').value;
-      
-      if (!courseSelected) {
-        // Show a pop-up alert if no course is selected
-        alert('Please select a course before starting the quiz.');
-        
-        // Ensure the home page and "Start Quiz" button are visible again
-        document.getElementById('homePage').style.display = 'block';
-        document.getElementById('startQuizBtn').style.display = 'block';  // Ensure button is visible
-        
-        // Hide quiz section to avoid confusion
-        document.getElementById('quizSection').style.display = 'none';
-      } else {
-        // Proceed with starting the quiz if a course is selected
-        document.getElementById('homePage').style.display = 'none';
-        document.getElementById('startQuizBtn').style.display = 'none';  // Hide start button after quiz begins
-        document.getElementById('quizSection').style.display = 'block';  // Show the quiz section
-      }
-    });
-
-
-
-
-// Exit button closes quiz popup
 exitBtn.onclick = () => {
   popupInfo.classList.remove('active');
   main.classList.remove('active');
 };
 
-// Continue button starts the quiz
-// continueBtn.onclick = () => {
-//   popupInfo.classList.remove("active");
-//   main.classList.add("active");
-//   quizBox.classList.add("active");
-
-//   // Clone and shuffle questions safely
-//   const shuffled = [...questions].sort(() => Math.random() - 0.5).slice(0, 5);
-//   questions = shuffled;
-
-//   // Reset counters
-//   questionCount = 0;
-//   questionNumb = 1;
-//   userScore = 0;
-
-//   // Safety: Check if question[0] exists
-//   if (!questions[0]) {
-//     alert("No questions loaded. Please check your questions.js file.");
-//     return;
-//   }
-
-//   // Update UI
-//   document.querySelector(".total-questions").textContent = questions.length;
-//   document.querySelector(".current-score").textContent = userScore;
-
-//   showQuestions(questionCount);
-//   questionCounter(questionNumb);
-//   headerScore();
-// };
-// Continue button starts the quiz
 continueBtn.onclick = () => {
   popupInfo.classList.remove("active");
   main.classList.add("active");
   quizBox.classList.add("active");
 
-  // Clone and shuffle questions safely
   const shuffled = [...questions].sort(() => Math.random() - 0.5).slice(0, 5);
-  questions = shuffled; // <-- This must be set BEFORE showQuestions
+  questions = shuffled;
 
-  // Reset counters
   questionCount = 0;
   questionNumb = 1;
   userScore = 0;
@@ -140,18 +75,14 @@ continueBtn.onclick = () => {
     return;
   }
 
-  // Update UI
   document.querySelector(".total-questions").textContent = questions.length;
   document.querySelector(".current-score").textContent = userScore;
 
-  // ❗ These must come AFTER setting the questions array
   showQuestions(questionCount);
   questionCounter(questionNumb);
   headerScore();
 };
 
-
-// Try Again Button
 tryAgainBtn.onclick = () => {
   quizBox.classList.add('active');
   resultBox.classList.remove('active');
@@ -162,7 +93,6 @@ tryAgainBtn.onclick = () => {
   headerScore();
 };
 
-// Go Home button
 goHomeBtn.onclick = () => {
   quizSection.classList.remove('active');
   resultBox.classList.remove('active');
@@ -172,7 +102,6 @@ goHomeBtn.onclick = () => {
   questionCounter(questionNumb);
 };
 
-// Next Button
 nextBtn.onclick = () => {
   if (questionCount < questions.length - 1) {
     questionCount++;
@@ -185,14 +114,12 @@ nextBtn.onclick = () => {
   }
 };
 
-// Reset Game
 function resetGame() {
   questionCount = 0;
   questionNumb = 1;
   userScore = 0;
 }
 
-// Show Question
 function showQuestions(index) {
   if (!questions || !questions[index]) {
     console.warn("No question found at index:", index);
@@ -213,12 +140,10 @@ function showQuestions(index) {
     opt.setAttribute('onclick', 'optionSelected(this)');
   });
 
-  // Update current and total question number in UI
   document.querySelector(".current-question").textContent = index + 1;
   document.querySelector(".total-questions").textContent = questions.length;
 }
 
-// Option selection logic
 function optionSelected(answer) {
   const userAnswer = answer.textContent;
   const correctAnswer = questions[questionCount].answer;
@@ -245,19 +170,34 @@ function optionSelected(answer) {
   nextBtn.classList.add("active");
 }
 
-// Update question counter
 function questionCounter(index) {
   const questionTotal = document.querySelector('.question-total');
   questionTotal.textContent = `${index} of ${questions.length} Questions`;
 }
 
-// Update score header
 function headerScore() {
   const headerScoreText = document.querySelector(".header-score");
   headerScoreText.textContent = `Score: ${userScore} / ${questions.length}`;
 }
 
-// Show result
+function submitScore(email, subject, score) {
+  fetch('/submit-score', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, subject, score })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Failed to submit score');
+    return res.json();
+  })
+  .then(data => {
+    console.log('Score submitted:', data.message);
+  })
+  .catch(err => {
+    console.error('Error submitting score:', err);
+  });
+}
+
 function showResultBox() {
   quizBox.classList.remove('active');
   resultBox.classList.add('active');
@@ -279,4 +219,14 @@ function showResultBox() {
       clearInterval(progress);
     }
   }, speed);
+
+  // Submit quiz score
+  const userEmail = localStorage.getItem("userEmail");
+  const selectedSubject = localStorage.getItem("selectedSubject") || "General";
+
+  if (userEmail) {
+    submitScore(userEmail, selectedSubject, userScore);
+  } else {
+    console.warn("User not logged in - score not submitted");
+  }
 }
