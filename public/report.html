@@ -2,75 +2,114 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quiz Report</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
       padding: 20px;
+      text-align: center;
     }
-    #myChart {
+    #chartContainer {
+      width: 100%;
       max-width: 700px;
       margin: auto;
     }
   </style>
 </head>
 <body>
-  <h2>Quiz Score Report</h2>
-  <canvas id="myChart" width="600" height="400"></canvas>
+  <h1>Your Quiz Report</h1>
+  <div id="chartContainer">
+    <canvas id="scoreChart"></canvas>
+  </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const email = localStorage.getItem('email');
-      if (!email) {
-        alert('Please log in first.');
-        return;
-      }
+    // Get user email from localStorage
+    const userEmail = localStorage.getItem("userEmail");
 
-      fetch(`/score-history/${email}`)
-        .then(response => {
-          if (!response.ok) throw new Error('Failed to fetch score history');
-          return response.json();
+    if (!userEmail) {
+      alert("You must be logged in to view your report.");
+      window.location.href = "login.html"; // Redirect to login if no email
+    } else {
+      fetch(`/score-history/${encodeURIComponent(userEmail)}`)
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch score history");
+          return res.json();
         })
-        .then(data => {
+        .then((data) => {
           const attempts = data.quizAttempts;
           if (!attempts || attempts.length === 0) {
-            alert('No quiz attempts found.');
+            alert("No quiz attempts found.");
             return;
           }
 
-          const subjects = attempts.map(attempt => attempt.subject);
-          const scores = attempts.map(attempt => attempt.score);
+          // Prepare data for the chart
+          // Group by subject, get highest score per subject (optional)
+          const subjectScores = {};
+          attempts.forEach(({ subject, score }) => {
+            if (!subjectScores[subject] || score > subjectScores[subject]) {
+              subjectScores[subject] = score;
+            }
+          });
 
-          const ctx = document.getElementById('myChart').getContext('2d');
+          // Extract labels and data
+          const labels = Object.keys(subjectScores);
+          const scores = Object.values(subjectScores);
+
+          // Create the chart
+          const ctx = document.getElementById("scoreChart").getContext("2d");
           new Chart(ctx, {
-            type: 'bar', // You can use 'line', 'bar', or 'radar'
+            type: "line",
             data: {
-              labels: subjects,
+              labels: labels,
               datasets: [{
-                label: 'Score',
+                label: "Highest Score per Subject",
                 data: scores,
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
+                borderColor: "rgba(75, 192, 192, 1)",
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                fill: true,
+                tension: 0.3,
+                pointRadius: 5,
+                pointHoverRadius: 7
               }]
             },
             options: {
               scales: {
                 y: {
                   beginAtZero: true,
-                  max: 10
+                  max: 10, // Adjust according to max quiz score
+                  title: {
+                    display: true,
+                    text: "Score"
+                  }
+                },
+                x: {
+                  title: {
+                    display: true,
+                    text: "Subject"
+                  }
+                }
+              },
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "top"
+                },
+                tooltip: {
+                  enabled: true
                 }
               }
             }
           });
         })
-        .catch(err => {
-          console.error(err);
-          alert('Error loading quiz history.');
+        .catch((error) => {
+          console.error("Error fetching report data:", error);
+          alert("Error loading report data. Please try again later.");
         });
-    });
+    }
   </script>
 </body>
 </html>
