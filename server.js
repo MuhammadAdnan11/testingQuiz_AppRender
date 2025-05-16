@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
-const User = require('./User'); // your User model
+// const User = require('./User'); // your User model
 app.use(express.json());
+const User = require('./models/User');
 
 // POST route to submit a quiz score
 app.post('/submit-score', async (req, res) => {
