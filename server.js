@@ -4,14 +4,16 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const User = require('./models/User'); // Make sure this exists and is correctly defined
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000; // Use Render’s dynamic port
 
 // ✅ Connect to MongoDB
-mongoose.connect('mongodb+srv://Adnan7527:Adnan191022@quizapp.2jcuizt.mongodb.net/quizapp?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch((err) => console.error('❌ MongoDB connection error:', err));
+
 
 // ✅ Middleware
 app.use(cors());
