@@ -58,6 +58,20 @@ app.post('/login', async (req, res) => {
 
 
 
+// app.get('/score-history/:email', async (req, res) => {
+//   const { email } = req.params;
+
+//   try {
+//     const user = await User.findOne({ email });
+
+//     if (!user) return res.status(404).send({ error: 'User not found' });
+
+//     res.json({ quizAttempts: user.quizAttempts });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send({ error: 'Server error' });
+//   }
+// });
 app.get('/score-history/:email', async (req, res) => {
   const { email } = req.params;
 
@@ -66,15 +80,13 @@ app.get('/score-history/:email', async (req, res) => {
 
     if (!user) return res.status(404).send({ error: 'User not found' });
 
+    // ✅ Send back quiz attempts as JSON
     res.json({ quizAttempts: user.quizAttempts });
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: 'Server error' });
   }
 });
-
-
-
 
 
 
@@ -87,14 +99,33 @@ app.post('/submit-score', async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).send({ error: 'User not found' });
 
-    user.quizAttempts.push({ subject, score });
+    user.quizAttempts.push({ subject, score }); // ← This adds a new attempt
     await user.save();
 
     res.send({ message: 'Score saved' });
   } catch (error) {
+    console.error(error);
     res.status(500).send({ error: 'Failed to save score' });
   }
 });
+
+
+
+// app.post('/submit-score', async (req, res) => {
+//   const { email, subject, score } = req.body;
+
+//   try {
+//     const user = await User.findOne({ email });
+//     if (!user) return res.status(404).send({ error: 'User not found' });
+
+//     user.quizAttempts.push({ subject, score });
+//     await user.save();
+
+//     res.send({ message: 'Score saved' });
+//   } catch (error) {
+//     res.status(500).send({ error: 'Failed to save score' });
+//   }
+// });
 
 // ✅ Start server
 app.listen(PORT, () => {

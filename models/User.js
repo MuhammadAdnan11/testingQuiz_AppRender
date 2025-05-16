@@ -10,13 +10,12 @@ const quizAttemptSchema = new mongoose.Schema({
   }
 });
 
-// User Schema
+// User Schema with embedded quizAttempts
 const userSchema = new mongoose.Schema({
   fullName: String,
   email: { type: String, unique: true },
   password: String,
-  quizAttempts: [quizAttemptSchema]  // ✅ Add this line
+  quizAttempts: [quizAttemptSchema] // ← This line is critical
 });
 
-// Export model
 module.exports = mongoose.model('User', userSchema);
