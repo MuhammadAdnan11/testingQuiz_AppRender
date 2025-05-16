@@ -2,56 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Quiz Report</title>
+  <title>Score Report</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    canvas {
+      max-width: 800px;
+      margin: 30px auto;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Your Quiz Report</h2>
-  <canvas id="scoreChart" width="600" height="400"></canvas>
+  <h1>Your Quiz Score Report</h1>
+  <canvas id="scoreChart" width="800" height="400"></canvas>
 
   <script>
-    const userEmail = localStorage.getItem('userEmail'); // Or however you're storing logged-in user
+    const userEmail = localStorage.getItem('userEmail');
 
     fetch(`/score-history/${userEmail}`)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch score history');
+        return res.json();
+      })
       .then(data => {
         const attempts = data.quizAttempts;
+        if (!attempts || !attempts.length) {
+          alert("No quiz attempts found.");
+          return;
+        }
 
-        // Aggregate scores by subject
+        // Group scores by subject
         const subjectScores = {};
-        attempts.forEach(({ subject, score }) => {
-          if (!subjectScores[subject]) subjectScores[subject] = [];
+        const maxAttempts = {};
+
+        attempts.forEach(({ subject, score }, index) => {
+          if (!subjectScores[subject]) {
+            subjectScores[subject] = [];
+            maxAttempts[subject] = 0;
+          }
           subjectScores[subject].push(score);
+          maxAttempts[subject]++;
         });
 
-        const subjects = Object.keys(subjectScores);
-        const averageScores = subjects.map(subj => {
-          const scores = subjectScores[subj];
-          return scores.reduce((a, b) => a + b, 0) / scores.length;
-        });
+        // Labels = max length of any subject's scores
+        const labels = Array.from({ length: Math.max(...Object.values(maxAttempts)) }, (_, i) => `Attempt ${i + 1}`);
 
-        // Render chart
+        const datasets = Object.entries(subjectScores).map(([subject, scores]) => ({
+          label: subject,
+          data: scores,
+          borderColor: getRandomColor(),
+          fill: false,
+          tension: 0.3
+        }));
+
         const ctx = document.getElementById('scoreChart').getContext('2d');
+
         new Chart(ctx, {
-          type: 'bar',
+          type: 'line',
           data: {
-            labels: subjects,
-            datasets: [{
-              label: 'Average Score',
-              data: averageScores,
-              backgroundColor: 'rgba(54, 162, 235, 0.6)'
-            }]
+            labels: labels,
+            datasets: datasets
           },
           options: {
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+                text: 'Quiz Scores by Subject'
+              }
+            },
             scales: {
               y: {
                 beginAtZero: true,
-                max: 100
+                title: {
+                  display: true,
+                  text: 'Score'
+                }
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: 'Attempts'
+                }
               }
             }
           }
         });
+      })
+      .catch(err => {
+        console.error('Error loading score history:', err);
+        alert('Could not load your report. Try again later.');
       });
+
+    function getRandomColor() {
+      return `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`;
+    }
   </script>
 </body>
 </html>
