@@ -280,3 +280,5 @@ function showResultBox() {
     }
   }, speed);
 }
+
+
