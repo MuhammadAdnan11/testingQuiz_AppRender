@@ -4,108 +4,119 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quiz Report</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 800px;
+      max-width: 900px;
       margin: 40px auto;
       padding: 20px;
       text-align: center;
     }
-    #chartContainer {
+    h2 {
+      margin-top: 40px;
+    }
+    table {
       width: 100%;
-      max-width: 700px;
-      margin: auto;
+      border-collapse: collapse;
+      margin: 20px 0 40px 0;
+    }
+    th, td {
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    tr:nth-child(even) {
+      background-color: #fafafa;
     }
   </style>
 </head>
 <body>
   <h1>Your Quiz Report</h1>
-  <div id="chartContainer">
-    <canvas id="scoreChart"></canvas>
+  <div id="reportContainer">
+    <!-- Subject tables go here -->
   </div>
 
   <script>
-    // Get user email from localStorage
     const userEmail = localStorage.getItem("userEmail");
 
     if (!userEmail) {
       alert("You must be logged in to view your report.");
-      window.location.href = "login.html"; // Redirect to login if no email
+      window.location.href = "login.html";
     } else {
       fetch(`/score-history/${encodeURIComponent(userEmail)}`)
-        .then((res) => {
+        .then(res => {
           if (!res.ok) throw new Error("Failed to fetch score history");
           return res.json();
         })
-        .then((data) => {
+        .then(data => {
           const attempts = data.quizAttempts;
           if (!attempts || attempts.length === 0) {
             alert("No quiz attempts found.");
             return;
           }
 
-          // Prepare data for the chart
-          // Group by subject, get highest score per subject (optional)
-          const subjectScores = {};
-          attempts.forEach(({ subject, score }) => {
-            if (!subjectScores[subject] || score > subjectScores[subject]) {
-              subjectScores[subject] = score;
-            }
+          // Group attempts by subject, sort by date desc, limit 4 per subject
+          const grouped = {};
+          attempts.forEach(a => {
+            if (!grouped[a.subject]) grouped[a.subject] = [];
+            grouped[a.subject].push({
+              ...a,
+              dateObj: new Date(a.date)
+            });
           });
 
-          // Extract labels and data
-          const labels = Object.keys(subjectScores);
-          const scores = Object.values(subjectScores);
-
-          // Create the chart
-          const ctx = document.getElementById("scoreChart").getContext("2d");
-          new Chart(ctx, {
-            type: "line",
-            data: {
-              labels: labels,
-              datasets: [{
-                label: "Highest Score per Subject",
-                data: scores,
-                borderColor: "rgba(75, 192, 192, 1)",
-                backgroundColor: "rgba(75, 192, 192, 0.2)",
-                fill: true,
-                tension: 0.3,
-                pointRadius: 5,
-                pointHoverRadius: 7
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  max: 10, // Adjust according to max quiz score
-                  title: {
-                    display: true,
-                    text: "Score"
-                  }
-                },
-                x: {
-                  title: {
-                    display: true,
-                    text: "Subject"
-                  }
-                }
-              },
-              plugins: {
-                legend: {
-                  display: true,
-                  position: "top"
-                },
-                tooltip: {
-                  enabled: true
-                }
-              }
-            }
+          // Sort each subject's attempts descending by date, keep max 4
+          Object.keys(grouped).forEach(subject => {
+            grouped[subject].sort((a, b) => b.dateObj - a.dateObj);
+            grouped[subject] = grouped[subject].slice(0, 4);
           });
+
+          const allSubjects = Object.keys(grouped).sort();
+
+          // How many subjects to show each time (you can change this)
+          const subjectsPerPage = 2;
+
+          // Get last shown start index from localStorage, default 0
+          let startIndex = parseInt(localStorage.getItem('reportStartIndex')) || 0;
+
+          // Get the subjects slice to display now
+          const subjectsToShow = [];
+          for(let i = 0; i < subjectsPerPage; i++) {
+            subjectsToShow.push(allSubjects[(startIndex + i) % allSubjects.length]);
+          }
+
+          // Save new startIndex for next time (rotate)
+          startIndex = (startIndex + subjectsPerPage) % allSubjects.length;
+          localStorage.setItem('reportStartIndex', startIndex);
+
+          // Build HTML tables for these subjects
+          let html = '';
+          subjectsToShow.forEach(subject => {
+            const attemptsForSubject = grouped[subject];
+            html += `<h2>Subject: ${subject}</h2>`;
+            html += `
+              <table>
+                <thead>
+                  <tr>
+                    <th>Score</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+            `;
+
+            attemptsForSubject.forEach(a => {
+              html += `<tr><td>${a.score}</td><td>${a.dateObj.toLocaleString()}</td></tr>`;
+            });
+
+            html += '</tbody></table>';
+          });
+
+          document.getElementById('reportContainer').innerHTML = html;
         })
-        .catch((error) => {
+        .catch(error => {
           console.error("Error fetching report data:", error);
           alert("Error loading report data. Please try again later.");
         });
