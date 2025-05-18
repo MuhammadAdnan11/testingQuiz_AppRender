@@ -91,6 +91,8 @@
           <option value="semester1">Semester 1</option>
           <option value="semester2">Semester 2</option>
           <option value="semester3">Semester 3</option>
+          <option value="CNA">CNA</option>
+          <option value="BSN">BSN</option>
         </select>
         
 
@@ -361,13 +363,29 @@ const coursesBySemester = {
     { value: "thrd_PaperA", text: "Paper-A (Spec)" },
     { value: "thrd_PaperB", text: "Paper-B (Spec)" },
  
+  ], 
+ CNA: [
+    { value: "ict", text: "Computer Skills" },
+    { value: "antPhy", text: "Anatomy/Physio" },
+    { value: "eng", text: "English" },
+    { value: "fon", text: "FON" },
+    { value: "isl", text: "Islamayat" },
+ 
+  ],
+    BSN: [
+     { value: "ict", text: "ICT" },
+    { value: "bsn-Fon", text: "FON" },
+    { value: "bsn-eng", text: "English" },
+    { value: "bsn-AP", text: "A&P" },
+    { value: "bsn-microbio", text: "Microbiology" },
+ 
   ],
 };
 
 // When semester changes, update courses dropdown
 semesterSelect.addEventListener("change", function () {
   const selectedSemester = this.value;
-console.log("Semester changed:", this.value);
+// console.log("Semester changed:", this.value);
   // Reset course select options
   courseSelect.innerHTML = '<option value="" disabled selected>Select a course</option>';
 
