@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us - Quiz Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f5f9ff;
+      color: #2d3436;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 40px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .left {
+      flex: 1;
+      text-align: center;
+    }
+
+    .left img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #2980b9;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      margin-bottom: 15px;
+    }
+
+    .left h2 {
+      font-size: 1.5rem;
+      margin: 10px 0 5px;
+      color: #2c3e50;
+    }
+
+    .left p {
+      font-size: 1rem;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .social-icons a {
+      text-decoration: none;
+      color: #2980b9;
+      margin: 0 10px;
+      font-size: 1.3rem;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #1a5276;
+    }
+
+    .right {
+      flex: 2;
+    }
+
+    .right h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      border-left: 6px solid #2980b9;
+      padding-left: 16px;
+    }
+
+    .right p {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .right ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    .right li {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 30px 20px;
+      }
+      .left, .right {
+        width: 100%;
+        text-align: center;
+      }
+      .right h1 {
+        text-align: center;
+        padding-left: 0;
+        border-left: none;
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="#" class="logo">QuizMaster</a>
+    <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+    <nav class="navbar">
+      <a href="./index.html" class="active">Home</a>
+      <a href="/public/about.html">About</a>
+      <!-- <a href="#">Services</a> -->
+      <a href="/public/contact.html">Contact</a>
+      <!-- <a href="#">Report</a> -->
+      <a href="./login.html">Login</a>
+      <a href="./registration.html">Register</a>
+    </nav>
+  </header>
+
+
+
+<div class="container">
+  <div class="left">
+    <img src="./image/about.jpg" alt="Muhammad Adnan" />
+    <h2>Muhammad Adnan</h2>
+    <p>Founder | QuizMaster</p>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/muhammad-adnan-174270251/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="adnan191022@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="#" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+  </div>
+
+  <div class="right">
+    <h1>About QuizMaster</h1>
+    <p><strong>QuizMaster</strong> is a modern and engaging platform designed to empower learners of all backgrounds through interactive, subject-based quizzes. Our mission is to make learning effective, enjoyable, and easily accessible to everyone.</p>
+
+    <p>With a focus on user-friendly design and up-to-date content, QuizMaster offers a seamless way to test knowledge, reinforce concepts, and track progress across multiple disciplines.</p>
+
+    <p><strong>Key Features:</strong></p>
+    <ul>
+      <li>Over 60+ curated questions per subject, with regular updates.</li>
+      <li>Course-based quizzes for streamlined and focused learning.</li>
+      <li>Responsive and visually pleasing interface across all devices.</li>
+      <li>Instant result feedback with highlighted correct answers.</li>
+      <li>Motivating UI enhancements like color cues and celebratory confetti.</li>
+    </ul>
+
+    <p>We're committed to continuous improvement, driven by feedback from learners like you. Thank you for choosing QuizMaster as your companion in education.</p>
+
+    <p><strong>Happy Learning!</strong></p>
+  </div>
+</div>
+
+</body>
+</html>
