@@ -92,7 +92,6 @@
           <option value="semester2">Semester 2</option>
           <option value="semester3">Semester 3</option>
         </select>
-
         
 
         <!-- Course dropdown -->
@@ -319,6 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const documentSection = document.getElementById("document-section");
   const documentLinks = document.getElementById("document-links");
 
+// 📚📕📕Notes pdf 
   const documentsBySubject = {
     ict: [
       { name: "Network", url: "docs/network.pdf" },
@@ -336,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ]
   };
 
+  // Course selection 📁📂
 const semesterSelect = document.getElementById("semester-select");
 // const courseSelect = document.getElementById("course-select");
 
@@ -344,14 +345,22 @@ const coursesBySemester = {
   semester1: [
     { value: "ict", text: "ICT" },
     { value: "ck", text: "Computer Skills" },
+    { value: "ant", text: "Anatomy" },
+    { value: "psy", text: "Physiology" },
+    { value: "biochem", text: "Biochemistry" },
+    { value: "eng", text: "English" },
   ],
   semester2: [
     { value: "ant", text: "Anatomy" },
     { value: "psy", text: "Physiology" },
   ],
   semester3: [
-    { value: "networking", text: "Networking" },
-    // Add more if needed
+    { value: "ict", text: "Computer Skills" },
+    { value: "bioeth", text: "Bio-Ethics" },
+    { value: "eng", text: "English" },
+    { value: "thrd_PaperA", text: "Paper-A (Spec)" },
+    { value: "thrd_PaperB", text: "Paper-B (Spec)" },
+ 
   ],
 };
 
