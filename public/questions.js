@@ -1748,7 +1748,7 @@ const questionBank =
         "course": "ant",
         "numb": 2,
         "question": "Which branch of anatomy deals with the study of tissues?",
-        "answer": "D. Embryology",
+        "answer": "B. Histology",
         "options": [
             "A. Systemic anatomy",
             "B. Histology",
@@ -1760,7 +1760,7 @@ const questionBank =
         "course": "ant",
         "numb": 3,
         "question": "The term \"anatomy\" is derived from the Greek word meaning:",
-        "answer": "A. To heal",
+        "answer": "B. To cut apart",
         "options": [
             "A. To heal",
             "B. To cut apart",
@@ -1784,7 +1784,7 @@ const questionBank =
         "course": "ant",
         "numb": 5,
         "question": "The study of the structural changes associated with disease is called:",
-        "answer": "B. Surgical anatomy",
+        "answer": "D. Pathological anatomy",
         "options": [
             "A. Developmental anatomy",
             "B. Surgical anatomy",
@@ -1796,7 +1796,7 @@ const questionBank =
         "course": "ant",
         "numb": 6,
         "question": "Which plane divides the body into superior and inferior portions?",
-        "answer": "B. Median",
+        "answer":  "C. Transverse",
         "options": [
             "A. Sagittal",
             "B. Median",
@@ -1808,7 +1808,7 @@ const questionBank =
         "course": "ant",
         "numb": 7,
         "question": "The term \"anterior\" refers to:",
-        "answer": "A. Toward the feet",
+        "answer": "C. Toward the front",
         "options": [
             "A. Toward the feet",
             "B. Toward the head",
@@ -1844,7 +1844,7 @@ const questionBank =
         "course": "ant",
         "numb": 10,
         "question": "The study of the structure and function of cells is called:",
-        "answer": "D. Pathology",
+        "answer": "A. Cytology",
         "options": [
             "A. Cytology",
             "B. Embryology",
@@ -1856,7 +1856,7 @@ const questionBank =
         "course": "ant",
         "numb": 11,
         "question": "Which term describes a structure closer to the midline of the body?",
-        "answer": "B. Distal",
+        "answer":  "D. Medial",
         "options": [
             "A. Proximal",
             "B. Distal",
@@ -1868,7 +1868,7 @@ const questionBank =
         "course": "ant",
         "numb": 12,
         "question": "The elbow is ___ to the wrist.",
-        "answer": "B. Superficial",
+        "answer":  "C. Proximal",
         "options": [
             "A. Distal",
             "B. Superficial",
@@ -1892,7 +1892,7 @@ const questionBank =
         "course": "ant",
         "numb": 14,
         "question": "Which of the following is NOT a fundamental plane of the body?",
-        "answer": "B. Transverse",
+        "answer":  "A. Oblique",
         "options": [
             "A. Oblique",
             "B. Transverse",
@@ -1904,7 +1904,7 @@ const questionBank =
         "course": "ant",
         "numb": 15,
         "question": "The study of the development of an individual from fertilization to birth is called:",
-        "answer": "C. Gerontology",
+        "answer":  "A. Embryology",
         "options": [
             "A. Embryology",
             "B. Cytology",
@@ -1916,7 +1916,7 @@ const questionBank =
         "course": "ant",
         "numb": 16,
         "question": "The term \"superficial\" refers to structures that are:",
-        "answer": "A. Inside an organ",
+        "answer":  "D. On the body surface",
         "options": [
             "A. Inside an organ",
             "B. Near the center of the body",
@@ -1928,7 +1928,7 @@ const questionBank =
         "course": "ant",
         "numb": 17,
         "question": "The diaphragm separates which two body cavities?",
-        "answer": "A. Dorsal and ventral",
+        "answer": "C. Thoracic and abdominal",
         "options": [
             "A. Dorsal and ventral",
             "B. Cranial and spinal",
@@ -1940,7 +1940,7 @@ const questionBank =
         "course": "ant",
         "numb": 18,
         "question": "The study of large body structures visible to the naked eye is called:",
-        "answer": "A. Radiographic anatomy",
+        "answer":  "B. Gross anatomy",
         "options": [
             "A. Radiographic anatomy",
             "B. Gross anatomy",
@@ -1964,7 +1964,7 @@ const questionBank =
         "course": "ant",
         "numb": 20,
         "question": "The term \"distal\" is used to describe a structure that is:",
-        "answer": "A. On the opposite side",
+        "answer":   "C. Farther from the point of attachment",
         "options": [
             "A. On the opposite side",
             "B. Closer to the point of attachment",
@@ -1976,7 +1976,7 @@ const questionBank =
         "course": "ant",
         "numb": 21,
         "question": "The spleen is located in which abdominopelvic quadrant?",
-        "answer": "C. Left lower quadrant",
+        "answer":  "B. Left upper quadrant",
         "options": [
             "A. Right upper quadrant",
             "B. Left upper quadrant",
@@ -1988,7 +1988,7 @@ const questionBank =
         "course": "ant",
         "numb": 22,
         "question": "Which of the following imaging techniques uses X-rays to produce images?",
-        "answer": "A. PET scan",
+        "answer":  "D. CT scan",
         "options": [
             "A. PET scan",
             "B. Ultrasound",
@@ -2000,7 +2000,7 @@ const questionBank =
         "course": "ant",
         "numb": 23,
         "question": "The study of the function of body structures is called:",
-        "answer": "C. Embryology",
+        "answer": "D. Physiology",
         "options": [
             "A. Histology",
             "B. Anatomy",
@@ -2012,7 +2012,7 @@ const questionBank =
         "course": "ant",
         "numb": 24,
         "question": "The term \"ventral\" refers to which body surface?",
-        "answer": "A. Top",
+        "answer": "B. Front",
         "options": [
             "A. Top",
             "B. Front",
@@ -2048,7 +2048,7 @@ const questionBank =
         "course": "ant",
         "numb": 27,
         "question": "The term \"homeostasis\" refers to:",
-        "answer": "C. Structural abnormalities",
+        "answer": "B. Maintenance of stable internal conditions",
         "options": [
             "A. Rapid cell division",
             "B. Maintenance of stable internal conditions",
@@ -2060,7 +2060,7 @@ const questionBank =
         "course": "ant",
         "numb": 28,
         "question": "Which body system is responsible for producing movement?",
-        "answer": "B. Integumentary system",
+        "answer":  "A. Muscular system",
         "options": [
             "A. Muscular system",
             "B. Integumentary system",
@@ -2072,7 +2072,7 @@ const questionBank =
         "course": "ant",
         "numb": 29,
         "question": "The smallest living unit of an organism is:",
-        "answer": "C. Molecule",
+        "answer":  "A. Cell",
         "options": [
             "A. Cell",
             "B. Organ",
@@ -2084,7 +2084,7 @@ const questionBank =
         "course": "ant",
         "numb": 30,
         "question": "The study of the structure of the nervous system is called:",
-        "answer": "C. Endocrinology",
+        "answer": "B. Neurology",
         "options": [
             "A. Cardiology",
             "B. Neurology",
@@ -2096,7 +2096,7 @@ const questionBank =
         "course": "ant",
         "numb": 31,
         "question": "The term \"inferior\" means:",
-        "answer": "C. Away from the midline",
+        "answer": "B. Below",
         "options": [
             "A. Toward the midline",
             "B. Below",
@@ -2108,7 +2108,7 @@ const questionBank =
         "course": "ant",
         "numb": 32,
         "question": "The liver is primarily located in which abdominopelvic region?",
-        "answer": "D. Right iliac",
+        "answer": "B. Right hypochondriac",
         "options": [
             "A. Left lumbar",
             "B. Right hypochondriac",
@@ -2120,7 +2120,7 @@ const questionBank =
         "course": "ant",
         "numb": 33,
         "question": "Which of the following is NOT a function of the skeletal system?",
-        "answer": "C. Blood cell formation",
+        "answer":   "B. Hormone production",
         "options": [
             "A. Movement",
             "B. Hormone production",
@@ -2132,7 +2132,7 @@ const questionBank =
         "course": "ant",
         "numb": 34,
         "question": "The study of how anatomical structures change over time is called:",
-        "answer": "D. Pathological anatomy",
+        "answer": "C. Developmental anatomy",
         "options": [
             "A. Radiographic anatomy",
             "B. Comparative anatomy",
@@ -2144,7 +2144,7 @@ const questionBank =
         "course": "ant",
         "numb": 35,
         "question": "The term \"lateral\" refers to a position:",
-        "answer": "C. Deep inside",
+        "answer":  "B. Away from the midline",
         "options": [
             "A. Toward the midline",
             "B. Away from the midline",
@@ -2156,7 +2156,7 @@ const questionBank =
         "course": "ant",
         "numb": 36,
         "question": "The kidneys are located in which body cavity?",
-        "answer": "A. Cranial",
+        "answer": "C. Abdominal",
         "options": [
             "A. Cranial",
             "B. Pelvic",
@@ -2180,7 +2180,7 @@ const questionBank =
         "course": "ant",
         "numb": 38,
         "question": "The study of the structure of the heart is called:",
-        "answer": "D. Pulmonology",
+        "answer":  "A. Cardiology",
         "options": [
             "A. Cardiology",
             "B. Nephrology",
@@ -2192,7 +2192,7 @@ const questionBank =
         "course": "ant",
         "numb": 39,
         "question": "The term \"proximal\" is used to describe a structure that is:",
-        "answer": "C. On the opposite side",
+        "answer": "A. Closer to the point of attachment",
         "options": [
             "A. Closer to the point of attachment",
             "B. Farther from the point of attachment",
@@ -2204,7 +2204,7 @@ const questionBank =
         "course": "ant",
         "numb": 40,
         "question": "The lungs are located in which body cavity?",
-        "answer": "A. Pelvic",
+        "answer":  "C. Thoracic",
         "options": [
             "A. Pelvic",
             "B. Abdominal",
@@ -2228,7 +2228,7 @@ const questionBank =
         "course": "ant",
         "numb": 42,
         "question": "The study of the structure of the kidneys is called:",
-        "answer": "C. Endocrinology",
+        "answer":  "A. Nephrology",
         "options": [
             "A. Nephrology",
             "B. Cardiology",
@@ -2240,7 +2240,7 @@ const questionBank =
         "course": "ant",
         "numb": 43,
         "question": "The term \"deep\" refers to structures that are:",
-        "answer": "C. On the opposite side",
+        "answer": "B. Away from the surface",
         "options": [
             "A. Toward the midline",
             "B. Away from the surface",
@@ -2252,7 +2252,7 @@ const questionBank =
         "course": "ant",
         "numb": 44,
         "question": "The stomach is located in which abdominopelvic region?",
-        "answer": "C. Right lumbar",
+        "answer":  "A. Epigastric",
         "options": [
             "A. Epigastric",
             "B. Hypogastric",
@@ -2272,71 +2272,8 @@ const questionBank =
             "D. Movement"
         ]
     },
-    {
-        "course": "ant",
-        "numb": 46,
-        "question": "The study of the structure of body parts and their relationships is called:",
-        "answer": "D. Embryology",
-        "options": [
-            "A. Anatomy",
-            "B. Physiology",
-            "C. Histology",
-            "D. Embryology"
-        ]
-    },
-    {
-        "course": "ant",
-        "numb": 47,
-        "question": "The term \"posterior\" refers to which body surface?",
-        "answer": "D. Top",
-        "options": [
-            "A. Front",
-            "B. Back",
-            "C. Side",
-            "D. Top"
-        ]
-    },
-    {
-        "course": "ant",
-        "numb": 48,
-        "question": "The urinary bladder is located in which body cavity?",
-        "answer": "A. Cranial",
-        "options": [
-            "A. Cranial",
-            "B. Thoracic",
-            "C. Pelvic",
-            "D. Abdominal"
-        ]
-    },
-    {
-        "course": "ant",
-        "numb": 49,
-        "question": "Which of the following is NOT a characteristic of epithelial tissue?",
-        "answer": "D. Polarity",
-        "options": [
-            "A. Abundant extracellular matrix",
-            "B. High regeneration capacity",
-            "C. Avascular",
-            "D. Polarity"
-        ]
-    },
-    {
-        "course": "ant",
-        "numb": 50,
-        "question": "The study of the structure of bones is called:",
-        "answer": "C. Angiology",
-        "options": [
-            "A. Arthrology",
-            "B. Myology",
-            "C. Angiology",
-            "D. Osteology"
-        ]
-    },
-
-
-
-
-
+   
+// End 
 
 
 
