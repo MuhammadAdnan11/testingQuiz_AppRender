@@ -169,5 +169,13 @@
   </div>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  // Hamburger menu toggle
+  document.getElementById('menu-toggle').addEventListener('click', () => {
+    document.querySelector('.navbar').classList.toggle('active');
+  });
+})
+</script>
 </body>
 </html>

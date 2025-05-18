@@ -71,7 +71,7 @@
       height: 90px;
     }
 
-    button {
+    #contact-button {
       width: 100%;
       background: linear-gradient(to right, #007bff, #00bcd4);
       color: #fff;
@@ -84,7 +84,7 @@
       transition: background 0.3s ease;
     }
 
-    button:hover {
+    #contact-button:hover {
       background: linear-gradient(to right, #0056b3, #0097a7);
     }
 
@@ -169,7 +169,7 @@
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="thankyou.html">
 
-        <button type="submit">Send Message</button>
+        <button type="submit" id="contact-button">Send Message</button>
       </form>
     </div>
 
@@ -195,5 +195,13 @@
 
   <div class="footer">© 2025 QuizMaster. All rights reserved.</div>
 
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  // Hamburger menu toggle
+  document.getElementById('menu-toggle').addEventListener('click', () => {
+    document.querySelector('.navbar').classList.toggle('active');
+  });
+})
+</script>
 </body>
 </html>
