@@ -521,7 +521,9 @@ semesterSelect.addEventListener("change", function () {
     if (registerLink) registerLink.style.display = "none";
 
     profileContainer.style.display = "flex";
-    profilePic.src = user.photoURL || "images/default-avatar.png";
+    // profilePic.src = user.photoURL || "images/default-avatar.png";
+    profilePic.src = user.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${user.email}`;
+
   } else {
     profileContainer.style.display = "none";
     if (loginLink) loginLink.style.display = "inline";
@@ -624,27 +626,28 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 //     }
 //   });
 
-const userId = localStorage.getItem('userId');
+(function () {
+  const userId = localStorage.getItem('userId');
 
-if (!userId) {
-  console.warn('User ID not found in localStorage.');
-  // Optionally redirect to login:
-  window.location.href = '/login.html';
-  return;
-}
+  if (!userId) {
+    console.warn('User ID not found in localStorage.');
+    window.location.href = '/login.html';
+    return; // ✅ now it's inside a function
+  }
 
-fetch(`/api/user/${userId}`)
-  .then(res => res.json())
-  .then(user => {
-    if (user.profileImage) {
-      const profileImg = document.getElementById('navProfile');
-      if (profileImg) {
-        profileImg.src = user.profileImage;
-      } else {
-        console.warn('#navProfile element not found');
+  fetch(`/api/user/${userId}`)
+    .then(res => res.json())
+    .then(user => {
+      if (user.profileImage) {
+        const profileImg = document.getElementById('navProfile');
+        if (profileImg) {
+          profileImg.src = user.profileImage;
+        } else {
+          console.warn('#navProfile element not found');
+        }
       }
-    }
-  });
+    });
+})();
 
 
 </script>
