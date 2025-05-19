@@ -559,35 +559,93 @@ semesterSelect.addEventListener("change", function () {
 
 
 // JS to handle picture upload 
+// document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+//   e.preventDefault();
+
+//   const formData = new FormData(e.target);
+//   formData.append('userId', localStorage.getItem('userId'));
+
+//   const res = await fetch('/api/upload-profile', {
+//     method: 'POST',
+//     body: formData
+//   });
+
+//   const result = await res.json();
+//   if (res.ok) {
+//     alert('Upload successful!');
+//     document.getElementById('navProfile').src = result.profileImage;
+//   } else {
+//     alert(result.error || 'Upload failed.');
+//   }
+// });
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const formData = new FormData(e.target);
-  formData.append('userId', localStorage.getItem('userId'));
+  const userId = localStorage.getItem('userId');
+  const imageFile = document.getElementById('imageInput').files[0];
 
-  const res = await fetch('/api/upload-profile', {
-    method: 'POST',
-    body: formData
-  });
+  if (!userId || !imageFile) {
+    alert("User not logged in or no file selected");
+    return;
+  }
 
-  const result = await res.json();
-  if (res.ok) {
-    alert('Upload successful!');
-    document.getElementById('navProfile').src = result.profileImage;
-  } else {
-    alert(result.error || 'Upload failed.');
+  const formData = new FormData();
+  formData.append('image', imageFile);
+  formData.append('userId', userId);
+
+  try {
+    const response = await fetch('/api/upload-profile', {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json(); // will throw error if response is not JSON
+
+    if (response.ok) {
+      console.log('Uploaded:', result.profileImage);
+      document.getElementById('profilePic').src = result.profileImage;
+    } else {
+      console.error('Upload failed:', result);
+      alert('Upload failed.');
+    }
+  } catch (err) {
+    console.error('Error:', err);
+    alert('Error uploading image');
   }
 });
 
 
+// const userId = localStorage.getItem('userId');
+// fetch(`/api/user/${userId}`)
+//   .then(res => res.json())
+//   .then(user => {
+//     if (user.profileImage) {
+//       document.getElementById('navProfile').src = user.profileImage;
+//     }
+//   });
+
 const userId = localStorage.getItem('userId');
+
+if (!userId) {
+  console.warn('User ID not found in localStorage.');
+  // Optionally redirect to login:
+  window.location.href = '/login.html';
+  return;
+}
+
 fetch(`/api/user/${userId}`)
   .then(res => res.json())
   .then(user => {
     if (user.profileImage) {
-      document.getElementById('navProfile').src = user.profileImage;
+      const profileImg = document.getElementById('navProfile');
+      if (profileImg) {
+        profileImg.src = user.profileImage;
+      } else {
+        console.warn('#navProfile element not found');
+      }
     }
   });
+
 
 </script>
 <!-- <script src="script.js"></script> -->

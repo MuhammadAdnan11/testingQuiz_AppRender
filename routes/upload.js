@@ -21,6 +21,8 @@ const upload = multer({ storage: storage });
 // Route: Upload profile picture
 router.post('/upload-profile', upload.single('image'), async (req, res) => {
   const { userId } = req.body;
+  console.log('Upload request for userId:', userId);
+
   if (!req.file) return res.status(400).json({ error: 'No file uploaded.' });
 
   try {

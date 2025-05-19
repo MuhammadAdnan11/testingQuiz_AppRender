@@ -13,12 +13,15 @@ const app = express();
 const PORT = process.env.PORT || 5000; // Use Render’s dynamic port
 
 
-// In your app.js/server.js
-app.use(express.static('public'));
 
 // const uploadRoute = require('./routes/upload');
 const uploadRoutes = require('./routes/upload');
 app.use('/api', uploadRoutes);
+
+// In your app.js/server.js
+app.use(express.static('public'));
+
+
 
 
 
