@@ -2,7 +2,7 @@ const popupInfo = document.querySelector('.popup-info');
 const exitBtn = document.querySelector('.exit-btn');
 const main = document.querySelector('.main');
 const continueBtn = document.querySelector('.continue-btn');
-const quizSection = document.querySelector('.quiz-section');
+// const quizSection = document.querySelector('.quiz-section');
 const quizBox = document.querySelector('.quiz-box');
 const resultBox = document.querySelector('.result-box');
 const tryAgainBtn = document.querySelector('.tryAgain-btn');
@@ -22,41 +22,6 @@ function getRandomQuestionsFromCourse(course, limit = 10) {
   return shuffled.slice(0, limit);
 }
 
-
-
-
-// Start button opens quiz popup
-// startBtn.onclick = () => {
-//   popupInfo.classList.add('active');
-//   main.classList.add('active');
-// };
-
-
-// startBtn.addEventListener("click", () => {
-//   const courseDropdown = document.getElementById("course-select");
-//   selectedCourse = courseDropdown.value;
-
-//   if (!selectedCourse) {
-//     alert("Please select a course to begin the quiz.");
-//     return;
-//   }
-
-//   questions = getRandomQuestionsFromCourse(selectedCourse, 10);
-
-//   if (questions.length === 0) {
-//     alert("No questions found for selected course.");
-//     return;
-//   }
-
-//   document.getElementById("home-section").style.display = "none";
-//   quizSection.style.display = "block";
-
-//   questionIndex = 0;
-//   userScore = 0;
-//   totalQuestionEls.forEach(el => el.textContent = questions.length);
-//   showQuestion(questionIndex);
-//   updateProgressBar(questionIndex);
-// });
 
 
  // JavaScript code for handling the Start Quiz button click
