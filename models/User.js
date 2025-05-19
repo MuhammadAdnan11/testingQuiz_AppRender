@@ -10,12 +10,16 @@ const quizAttemptSchema = new mongoose.Schema({
   }
 });
 
-// User Schema with embedded quizAttempts
+// Updated User Schema
 const userSchema = new mongoose.Schema({
   fullName: String,
   email: { type: String, unique: true },
   password: String,
-  quizAttempts: [quizAttemptSchema] // ✅ This is important
+  profileImage: {
+    type: String, // store the image file path, e.g., '/uploads/avatar123.jpg'
+    default: '/uploads/default-avatar.png'
+  },
+  quizAttempts: [quizAttemptSchema]
 });
 
 module.exports = mongoose.model('User', userSchema);

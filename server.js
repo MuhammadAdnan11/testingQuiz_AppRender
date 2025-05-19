@@ -107,6 +107,7 @@ app.post('/submit-score', async (req, res) => {
   }
 });
 
+app.use('/uploads', express.static('uploads'));
 
 
 // app.post('/submit-score', async (req, res) => {

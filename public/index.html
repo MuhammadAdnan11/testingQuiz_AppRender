@@ -26,22 +26,46 @@
     #document-links li {
       margin: 5px 0;
     }
-  </style>
+
+
+
+     </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
 </head>
 <body>
-  <header class="header">
+  <!-- <header class="header">
     <a href="#" class="logo">QuizMaster</a>
     <button class="menu-toggle" id="menu-toggle">&#9776;</button>
     <nav class="navbar">
       <a href="./index.html" class="active">Home</a>
       <a href="./about.html">About</a>
-      <!-- <a href="#">Services</a> -->
+    
       <a href="./contact.html">Contact</a>
-      <!-- <a href="#">Report</a> -->
+    
       <a href="./login.html">Login</a>
       <a href="./registration.html">Register</a>
     </nav>
-  </header>
+  </header> -->
+
+  <header class="header">
+  <a href="#" class="logo">QuizMaster</a>
+  <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+
+  <nav class="navbar" id="main-navbar">
+    <a href="./index.html" class="active">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./contact.html">Contact</a>
+    <a href="./login.html" id="login-link">Login</a>
+    <a href="./registration.html" id="register-link">Register</a>
+
+    <!-- Profile Area (Initially hidden) -->
+    <div class="profile-container" id="profile-container" style="display: none;">
+      <img src="images/default-avatar.png" alt="Profile" id="profile-pic" />
+    </div>
+  </nav>
+</header>
+
 
 <!-- ETEA News Sidebar -->
 <div class="news-sidebar">
@@ -65,7 +89,7 @@
   <!-- Inside your #home-section, replace this part -->
    <section class="home" id="home-section">
 <div class="home-content">
-  <h1>QuizMaster</h1>
+  <h1 class="quiz-title">QuizMaster</h1>
 <p>Select a course and start the quiz:</p>
  <!-- Semester dropdown -->
   
@@ -115,7 +139,8 @@
     <!-- Quiz Section -->
     <section class="quiz-section" style="display: none;">
       <div class="quiz-box">
-        <h1>QuizMaster</h1>
+       <h1 class="quiz-title">QuizMaster</h1>
+
         <div class="quiz-header">
           <span>Course: <span id="selected-course-label">-</span></span><br />
           <span>Score: <span class="current-score">0</span> / <span class="total-questions">0</span></span>
@@ -309,13 +334,13 @@ document.addEventListener('DOMContentLoaded', () => {
     ict: [
       { name: "Network", url: "docs/network.pdf" },
       { name: "Network Topologies", url: "docs/network-topologies.pdf" },
-      { name: "Network Topologies", url: "docs/computer-virus.pdf" }
+      { name: "Computer Virus", url: "docs/computer-virus.pdf" }
 
         ],
      ck: [
       { name: "Network", url: "docs/network.pdf" },
       { name: "Network Topologies", url: "docs/network-topologies.pdf" },
-      { name: "Network Topologies", url: "docs/computer-virus.pdf" }
+      { name: "Computer Virus", url: "docs/computer-virus.pdf" }
 
     ]
     // msword: [
@@ -341,8 +366,13 @@ const coursesBySemester = {
     { value: "eng", text: "English" },
   ],
   semester2: [
-    { value: "ant", text: "Anatomy" },
-    { value: "psy", text: "Physiology" },
+    { value: "Pharma", text: "Pharmacology" },
+    { value: "Pub-Health", text: "Public Health" },
+    { value: "Pathology", text: "Pathology" },
+    { value: "2nd-Eng", text: "English" },
+    { value: "2nd-1st-Aid", text: "1st Aid" },
+    { value: "2nd-Islamayat", text: "Islamayat" },
+
   ],
   semester3: [
     { value: "ict", text: "Computer Skills" },

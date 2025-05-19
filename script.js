@@ -282,3 +282,27 @@ function showResultBox() {
 }
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const loginLink = document.getElementById("login-link");
+  const registerLink = document.getElementById("register-link");
+  const profileContainer = document.getElementById("profile-container");
+  const profilePic = document.getElementById("profile-pic");
+
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  if (user && user.email) {
+    // Hide login and register links
+    if (loginLink) loginLink.style.display = "none";
+    if (registerLink) registerLink.style.display = "none";
+
+    // Show profile image
+    profileContainer.style.display = "flex";
+    profilePic.src = user.photoURL || "images/default-avatar.png";
+  } else {
+    profileContainer.style.display = "none";
+    if (loginLink) loginLink.style.display = "inline";
+    if (registerLink) registerLink.style.display = "inline";
+  }
+});
+
+
