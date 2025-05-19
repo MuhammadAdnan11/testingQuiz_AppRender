@@ -327,6 +327,11 @@ window.addEventListener("load", () => {
     document.getElementById("login-link")?.classList.add("hidden");
     document.getElementById("register-link")?.classList.add("hidden");
   }
+
+  console.log("User object:", user);
+console.log("Profile image element:", profilePic);
+console.log("Setting profile pic to:", user?.profilePicUrl);
+
 });
 
 
