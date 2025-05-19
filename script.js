@@ -303,6 +303,33 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginLink) loginLink.style.display = "inline";
     if (registerLink) registerLink.style.display = "inline";
   }
+
+window.addEventListener("load", () => {
+  const user = JSON.parse(localStorage.getItem("quizUser"));
+  const profilePic = document.getElementById("profile-pic");
+  const userEmail = document.getElementById("user-email");
+  const profileContainer = document.getElementById("profile-container");
+
+  if (user) {
+    if (user.profilePicUrl && profilePic) {
+      profilePic.src = user.profilePicUrl;
+      profilePic.classList.remove("hidden");
+    }
+    if (user.email && userEmail) {
+      userEmail.textContent = user.email;
+      userEmail.classList.remove("hidden");
+    }
+    if (profileContainer) {
+      profileContainer.style.display = "flex"; // or "block"
+    }
+
+    // Optionally hide login/register links
+    document.getElementById("login-link")?.classList.add("hidden");
+    document.getElementById("register-link")?.classList.add("hidden");
+  }
+});
+
+
 });
 
 
