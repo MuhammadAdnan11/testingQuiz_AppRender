@@ -62,7 +62,8 @@
     <!-- Profile Area (Initially hidden) -->
     <div class="profile-container" id="profile-container" style="display: none;">
       <!-- <img src="images/default-avatar.png" alt="Profile" id="profile-pic" /> -->
-       <img src="https://i.pravatar.cc/40" alt="Profile" id="profile-pic" />
+       <!-- <img src="https://i.pravatar.cc/40" alt="Profile" id="profile-pic" /> -->
+<img id="navProfile" src="/uploads/default-avatar.png" alt="Profile" />
 
     </div>
   </nav>
@@ -128,8 +129,13 @@
     
    </section>
 
-<!-- Add semester select -->
 
+<!-- Profile picture upload  -->
+
+<form id="uploadForm" enctype="multipart/form-data">
+  <input type="file" name="image" accept="image/*" required />
+  <button type="submit">Upload</button>
+</form>
 
 
 
@@ -550,6 +556,38 @@ semesterSelect.addEventListener("change", function () {
     console.log("Setting profile pic to:", user?.profilePicUrl);
   });
 });
+
+
+// JS to handle picture upload 
+document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  formData.append('userId', localStorage.getItem('userId'));
+
+  const res = await fetch('/api/upload-profile', {
+    method: 'POST',
+    body: formData
+  });
+
+  const result = await res.json();
+  if (res.ok) {
+    alert('Upload successful!');
+    document.getElementById('navProfile').src = result.profileImage;
+  } else {
+    alert(result.error || 'Upload failed.');
+  }
+});
+
+
+const userId = localStorage.getItem('userId');
+fetch(`/api/user/${userId}`)
+  .then(res => res.json())
+  .then(user => {
+    if (user.profileImage) {
+      document.getElementById('navProfile').src = user.profileImage;
+    }
+  });
 
 </script>
 <!-- <script src="script.js"></script> -->
