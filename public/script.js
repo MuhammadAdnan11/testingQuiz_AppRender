@@ -2,7 +2,7 @@ const popupInfo = document.querySelector('.popup-info');
 const exitBtn = document.querySelector('.exit-btn');
 const main = document.querySelector('.main');
 const continueBtn = document.querySelector('.continue-btn');
-// const quizSection = document.querySelector('.quiz-section');
+// const quizSection = document.querySelector('.quiz-section'); // Currently unused, keep commented
 const quizBox = document.querySelector('.quiz-box');
 const resultBox = document.querySelector('.result-box');
 const tryAgainBtn = document.querySelector('.tryAgain-btn');
@@ -10,7 +10,7 @@ const goHomeBtn = document.querySelector('.goHome-btn');
 
 let questionCount = 0;
 let questionNumb = 1;
-let userScore = 0;
+let userScore = 0;  // Declare once here
 
 const nextBtn = document.querySelector('.next-btn');
 const optionsList = document.querySelector('.option-list');
@@ -23,30 +23,21 @@ function getRandomQuestionsFromCourse(course, limit = 10) {
 }
 
 
-
- // JavaScript code for handling the Start Quiz button click
-    document.getElementById('startQuizBtn').addEventListener('click', function () {
-      const courseSelected = document.getElementById('courseSelect').value;
-      
-      if (!courseSelected) {
-        // Show a pop-up alert if no course is selected
-        alert('Please select a course before starting the quiz.');
-        
-        // Ensure the home page and "Start Quiz" button are visible again
-        document.getElementById('homePage').style.display = 'block';
-        document.getElementById('startQuizBtn').style.display = 'block';  // Ensure button is visible
-        
-        // Hide quiz section to avoid confusion
-        document.getElementById('quizSection').style.display = 'none';
-      } else {
-        // Proceed with starting the quiz if a course is selected
-        document.getElementById('homePage').style.display = 'none';
-        document.getElementById('startQuizBtn').style.display = 'none';  // Hide start button after quiz begins
-        document.getElementById('quizSection').style.display = 'block';  // Show the quiz section
-      }
-    });
-
-
+// Handle Start Quiz button click
+document.getElementById('startQuizBtn').addEventListener('click', function () {
+  const courseSelected = document.getElementById('courseSelect').value;
+  
+  if (!courseSelected) {
+    alert('Please select a course before starting the quiz.');
+    document.getElementById('homePage').style.display = 'block';
+    document.getElementById('startQuizBtn').style.display = 'block';
+    document.getElementById('quizSection').style.display = 'none';
+  } else {
+    document.getElementById('homePage').style.display = 'none';
+    document.getElementById('startQuizBtn').style.display = 'none';
+    document.getElementById('quizSection').style.display = 'block';
+  }
+});
 
 
 // Exit button closes quiz popup
@@ -55,35 +46,7 @@ exitBtn.onclick = () => {
   main.classList.remove('active');
 };
 
-// Continue button starts the quiz
-// continueBtn.onclick = () => {
-//   popupInfo.classList.remove("active");
-//   main.classList.add("active");
-//   quizBox.classList.add("active");
 
-//   // Clone and shuffle questions safely
-//   const shuffled = [...questions].sort(() => Math.random() - 0.5).slice(0, 5);
-//   questions = shuffled;
-
-//   // Reset counters
-//   questionCount = 0;
-//   questionNumb = 1;
-//   userScore = 0;
-
-//   // Safety: Check if question[0] exists
-//   if (!questions[0]) {
-//     alert("No questions loaded. Please check your questions.js file.");
-//     return;
-//   }
-
-//   // Update UI
-//   document.querySelector(".total-questions").textContent = questions.length;
-//   document.querySelector(".current-score").textContent = userScore;
-
-//   showQuestions(questionCount);
-//   questionCounter(questionNumb);
-//   headerScore();
-// };
 // Continue button starts the quiz
 continueBtn.onclick = () => {
   popupInfo.classList.remove("active");
@@ -108,7 +71,6 @@ continueBtn.onclick = () => {
   document.querySelector(".total-questions").textContent = questions.length;
   document.querySelector(".current-score").textContent = userScore;
 
-  // ❗ These must come AFTER setting the questions array
   showQuestions(questionCount);
   questionCounter(questionNumb);
   headerScore();
@@ -128,13 +90,16 @@ tryAgainBtn.onclick = () => {
 
 // Go Home button
 goHomeBtn.onclick = () => {
-  quizSection.classList.remove('active');
+  // quizSection may be undefined/commented, so safely check before removing class
+  const quizSection = document.querySelector('.quiz-section');
+  if (quizSection) quizSection.classList.remove('active');
   resultBox.classList.remove('active');
   nextBtn.classList.remove('active');
   resetGame();
   showQuestions(questionCount);
   questionCounter(questionNumb);
 };
+
 
 // Next Button
 nextBtn.onclick = () => {
@@ -149,12 +114,14 @@ nextBtn.onclick = () => {
   }
 };
 
+
 // Reset Game
 function resetGame() {
   questionCount = 0;
   questionNumb = 1;
   userScore = 0;
 }
+
 
 // Show Question
 function showQuestions(index) {
@@ -177,10 +144,10 @@ function showQuestions(index) {
     opt.setAttribute('onclick', 'optionSelected(this)');
   });
 
-  // Update current and total question number in UI
   document.querySelector(".current-question").textContent = index + 1;
   document.querySelector(".total-questions").textContent = questions.length;
 }
+
 
 // Option selection logic
 function optionSelected(answer) {
@@ -209,17 +176,20 @@ function optionSelected(answer) {
   nextBtn.classList.add("active");
 }
 
+
 // Update question counter
 function questionCounter(index) {
   const questionTotal = document.querySelector('.question-total');
   questionTotal.textContent = `${index} of ${questions.length} Questions`;
 }
 
+
 // Update score header
 function headerScore() {
   const headerScoreText = document.querySelector(".header-score");
   headerScoreText.textContent = `Score: ${userScore} / ${questions.length}`;
 }
+
 
 // Show result
 function showResultBox() {
@@ -255,11 +225,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
   if (user && user.email) {
-    // Hide login and register links
     if (loginLink) loginLink.style.display = "none";
     if (registerLink) registerLink.style.display = "none";
 
-    // Show profile image
     profileContainer.style.display = "flex";
     profilePic.src = user.photoURL || "images/default-avatar.png";
   } else {
@@ -268,37 +236,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (registerLink) registerLink.style.display = "inline";
   }
 
-window.addEventListener("load", () => {
-  const user = JSON.parse(localStorage.getItem("quizUser"));
-  const profilePic = document.getElementById("profile-pic");
-  const userEmail = document.getElementById("user-email");
-  const profileContainer = document.getElementById("profile-container");
+  window.addEventListener("load", () => {
+    const user = JSON.parse(localStorage.getItem("quizUser"));
+    const profilePic = document.getElementById("profile-pic");
+    const userEmail = document.getElementById("user-email");
+    const profileContainer = document.getElementById("profile-container");
 
-  if (user) {
-    if (user.profilePicUrl && profilePic) {
-      profilePic.src = user.profilePicUrl;
-      profilePic.classList.remove("hidden");
+    if (user) {
+      if (user.profilePicUrl && profilePic) {
+        profilePic.src = user.profilePicUrl;
+        profilePic.classList.remove("hidden");
+      }
+      if (user.email && userEmail) {
+        userEmail.textContent = user.email;
+        userEmail.classList.remove("hidden");
+      }
+      if (profileContainer) {
+        profileContainer.style.display = "flex";
+      }
+
+      document.getElementById("login-link")?.classList.add("hidden");
+      document.getElementById("register-link")?.classList.add("hidden");
     }
-    if (user.email && userEmail) {
-      userEmail.textContent = user.email;
-      userEmail.classList.remove("hidden");
-    }
-    if (profileContainer) {
-      profileContainer.style.display = "flex"; // or "block"
-    }
 
-    // Optionally hide login/register links
-    document.getElementById("login-link")?.classList.add("hidden");
-    document.getElementById("register-link")?.classList.add("hidden");
-  }
-
-  console.log("User object:", user);
-console.log("Profile image element:", profilePic);
-console.log("Setting profile pic to:", user?.profilePicUrl);
-
+    console.log("User object:", user);
+    console.log("Profile image element:", profilePic);
+    console.log("Setting profile pic to:", user?.profilePicUrl);
+  });
 });
-
-
-});
-
-
