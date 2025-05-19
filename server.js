@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 
 // ✅ Serve static files from "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ✅ Serve index.html on root route
 app.get('/', (req, res) => {
@@ -107,10 +108,10 @@ app.post('/submit-score', async (req, res) => {
   }
 });
 
-app.use('/uploads', express.static('uploads'));
 
 
-// app.post('/submit-score', async (req, res) => {
+
+
 //   const { email, subject, score } = req.body;
 
 //   try {
