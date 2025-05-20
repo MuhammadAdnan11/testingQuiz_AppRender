@@ -6,7 +6,7 @@ const path = require('path');
 const User = require('./models/User');
  // Make sure this exists and is correctly defined
 require('dotenv').config();
-const User = require('./models/User');
+// const User = require('./models/User');
 
 const app = express();
 const PORT = process.env.PORT || 5000; // Use Render’s dynamic port
