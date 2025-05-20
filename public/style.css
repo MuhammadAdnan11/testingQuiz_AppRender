@@ -61,7 +61,7 @@ body.dark {
 } */
  /* Fix navbar height */
 .navbar {
-  height: 60px; /* or whatever you want */
+  height: 25px; /* or whatever you want */
   display: flex;
   align-items: center;
   /* background-color: #123456; */
