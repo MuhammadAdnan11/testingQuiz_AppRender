@@ -98,21 +98,29 @@ body.dark {
 } */
 
 /* Profile image container */
+
+/* Navbar profile image container - remove padding/margin and background */
 .profile-container {
   display: flex;
   align-items: center;
   margin-left: 1rem;
+  /* Remove any padding or background */
+  padding: 0;
+  background: transparent;
+  height: 100%; /* make it fill navbar height */
 }
 
-/* Profile image styling */
+/* Profile image: rounded, no container visible, fit navbar height exactly */
 #profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; /* makes it round */
-  object-fit: cover;   /* keeps the image from stretching */
-  border: 2px solid #fff; /* optional: white border for aesthetics */
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* optional: subtle shadow */
+  width: 36px;       /* same height as navbar (adjust if needed) */
+  height: 36px;      /* keep square */
+  border-radius: 50%; /* perfectly round */
+  object-fit: cover;  /* crop properly */
+  border: none;       /* remove border if you don't want it */
+  box-shadow: none;   /* remove shadow */
+  display: block;
 }
+
 
 
 
