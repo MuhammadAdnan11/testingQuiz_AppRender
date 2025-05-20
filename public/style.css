@@ -80,7 +80,7 @@ body.dark {
   color: white;
   cursor: pointer;
 }
-/* Profile image area inside navbar */
+/* Profile image area inside navbar
 .profile-container {
   display: flex;
   align-items: center;
@@ -95,7 +95,26 @@ body.dark {
   object-fit: cover;
   border: 2px solid #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+} */
+
+/* Profile image container */
+.profile-container {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
 }
+
+/* Profile image styling */
+#profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* makes it round */
+  object-fit: cover;   /* keeps the image from stretching */
+  border: 2px solid #fff; /* optional: white border for aesthetics */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* optional: subtle shadow */
+}
+
+
 
 
 /* Mobile Nav */
