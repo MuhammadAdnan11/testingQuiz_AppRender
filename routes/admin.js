@@ -1,7 +1,9 @@
 // routes/admin.js
 const express = require('express');
 const router = express.Router();
-const isAdmin = require('../routes/isAdmin');
+// const isAdmin = require('../routes/isAdmin');
+const isAdmin = require('../models/isAdmin'); // ✅ Correct
+
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const User = require('../models/User');
