@@ -15,8 +15,13 @@ const userSchema = new mongoose.Schema({
   fullName: String,
   email: { type: String, unique: true },
   password: String,
+  role: {
+    type: String,
+    enum: ['student', 'admin'],
+    default: 'student'
+  },
   // profileImage: {
-  //   type: String, // store the image file path, e.g., '/uploads/avatar123.jpg'
+  //   type: String,
   //   default: '/uploads/default-avatar.png'
   // },
   quizAttempts: [quizAttemptSchema]

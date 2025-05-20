@@ -11,6 +11,15 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000; // Use Render’s dynamic port
 
+
+// const adminRoutes = require('./routes/admin');
+const adminRoute require('./routes/admin');
+app.use('/admin', adminRoutes);
+
+app.use('/css', express.static('public/admin/css'));
+app.use('/js', express.static('public/admin/js'));
+
+
 // ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB connected'))
