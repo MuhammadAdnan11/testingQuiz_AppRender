@@ -43,48 +43,34 @@ body.dark {
 }
 
 /* Navigation */
-
-
-
-/* Ensure navbar has a fixed height */
-.header {
-  height: 60px; /* adjust as needed */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #fff; /* or your preferred color */
-  padding: 0 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Style the navbar links and layout */
 .navbar {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  gap: 1rem;
+
+  
 }
 
-/* Style for the profile container */
+
+
+/* Profile container doesn't grow beyond navbar */
 .profile-container {
+  /* height: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  background: transparent;
+  padding: 0;
+  margin: 0;
 }
 
-/* Style for the profile image */
-#profile-pic {
+/* Image styling */
+.profile-pic {
+  height: 40px;   /* max height inside navbar */
   width: 40px;
-  height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  background: none;
-  border: 2px solid transparent;
+  display: block;
 }
-#profile-pic:hover {
-  border-color: #007BFF; /* or any color you like */
-}
-
 
 
 .navbar a {
