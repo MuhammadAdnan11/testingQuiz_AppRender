@@ -60,9 +60,9 @@
     <a href="./registration.html" id="register-link">Register</a>
 
     <!-- Profile Area (Initially hidden) -->
-    <div class="profile-container" id="profile-container" style="display: none;">
+    <!-- <div class="profile-container" id="profile-container" style="display: none;"> -->
       <!-- <img src="images/default-avatar.png" alt="Profile" id="profile-pic" /> -->
-       <img src="https://i.pravatar.cc/40" alt="Profile" id="profile-pic" />
+       <!-- <img src="https://i.pravatar.cc/40" alt="Profile" id="profile-pic" /> -->
 
     </div>
   </nav>
@@ -524,30 +524,30 @@ semesterSelect.addEventListener("change", function () {
 
   window.addEventListener("load", () => {
     const user = JSON.parse(localStorage.getItem("quizUser"));
-    const profilePic = document.getElementById("profile-pic");
+    // const profilePic = document.getElementById("profile-pic");
     const userEmail = document.getElementById("user-email");
-    const profileContainer = document.getElementById("profile-container");
+    // const profileContainer = document.getElementById("profile-container");
 
     if (user) {
-      if (user.profilePicUrl && profilePic) {
-        profilePic.src = user.profilePicUrl;
-        profilePic.classList.remove("hidden");
-      }
+      // if (user.profilePicUrl && profilePic) {
+      //   profilePic.src = user.profilePicUrl;
+      //   profilePic.classList.remove("hidden");
+      // }
       if (user.email && userEmail) {
         userEmail.textContent = user.email;
         userEmail.classList.remove("hidden");
       }
-      if (profileContainer) {
-        profileContainer.style.display = "flex";
-      }
+      // if (profileContainer) {
+      //   profileContainer.style.display = "flex";
+      // }
 
       document.getElementById("login-link")?.classList.add("hidden");
       document.getElementById("register-link")?.classList.add("hidden");
     }
 
-    console.log("User object:", user);
-    console.log("Profile image element:", profilePic);
-    console.log("Setting profile pic to:", user?.profilePicUrl);
+    // console.log("User object:", user);
+    // console.log("Profile image element:", profilePic);
+    // console.log("Setting profile pic to:", user?.profilePicUrl);
   });
 });
 
