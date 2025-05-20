@@ -676,5 +676,21 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
 </script>
 <!-- <script src="script.js"></script> -->
+
+
+  <!-- Login redirection fix -->
+  <script>
+    // Redirect to login page if not logged in and not already on login/registration pages
+    const allowedPaths = ['login.html', 'registration.html'];
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    if (!isLoggedIn) {
+      const currentPage = window.location.pathname.split('/').pop();
+      if (!allowedPaths.includes(currentPage)) {
+        window.location.href = 'login.html';
+      }
+    }
+  </script>
+
 </body>
 </html>
