@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const User = require('./models/User');
+
  // Make sure this exists and is correctly defined
 require('dotenv').config();
 // const User = require('./models/User');
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 5000; // Use Render’s dynamic port
 
 
 // const adminRoutes = require('./routes/admin');
+const adminRoutes = require('./routes/adminRoutes');  // adjust path if needed
 
 const adminRoute = require('./routes/admin');
 
