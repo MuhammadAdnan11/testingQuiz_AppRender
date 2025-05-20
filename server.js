@@ -8,23 +8,8 @@ const path = require('path');
 require('dotenv').config();
 const User = require('./models/User');
 
-
 const app = express();
 const PORT = process.env.PORT || 5000; // Use Render’s dynamic port
-
-
-
-// const uploadRoute = require('./routes/upload');
-const uploadRoutes = require('./routes/upload');
-app.use('/api', uploadRoutes);
-
-// In your app.js/server.js
-app.use(express.static('public'));
-
-
-
-
-
 
 // ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)

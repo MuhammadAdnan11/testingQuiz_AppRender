@@ -8,18 +8,11 @@
     <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- <script>
+  <script>
     if (!localStorage.getItem("isLoggedIn")) {
       window.location.href = "login.html";
     }
-  </script> -->
-  <!-- <script>
-  console.log("isLoggedIn in localStorage:", localStorage.getItem("isLoggedIn"));
-  if (localStorage.getItem("isLoggedIn") !== "true") {
-    window.location.href = "login.html";
-  }
-</script> -->
-
+  </script>
   <style>
     #quizSection {
       display: none;
@@ -69,8 +62,7 @@
     <!-- Profile Area (Initially hidden) -->
     <div class="profile-container" id="profile-container" style="display: none;">
       <!-- <img src="images/default-avatar.png" alt="Profile" id="profile-pic" /> -->
-       <!-- <img src="https://i.pravatar.cc/40" alt="Profile" id="profile-pic" /> -->
-<img id="navProfile" src="/uploads/default-avatar.png" alt="Profile" />
+       <img src="https://i.pravatar.cc/40" alt="Profile" id="profile-pic" />
 
     </div>
   </nav>
@@ -120,7 +112,7 @@
           <option value="" disabled selected>Select a course</option>
           <!-- options loaded dynamically based on semester -->
         </select>
-</div> 
+</div>
        <!-- Document links section -->
       <div id="document-section" style="display: none;">
   <h3 class="doc-toggle">Available Documents <span class="arrow">▼</span></h3>
@@ -136,13 +128,8 @@
     
    </section>
 
+<!-- Add semester select -->
 
-<!-- Profile picture upload  -->
-
-<form id="uploadForm" enctype="multipart/form-data">
-  <input type="file" name="image" accept="image/*" required />
-  <button type="submit">Upload</button>
-</form>
 
 
 
@@ -344,23 +331,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const documentSection = document.getElementById("document-section");
   const documentLinks = document.getElementById("document-links");
 
-    // Display profile picture and toggle nav links based on login status
-  const user = JSON.parse(localStorage.getItem("quizUser"));
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-  if (isLoggedIn && user && user.profilePicUrl) {
-    const profileContainer = document.getElementById("profile-container");
-    const profilePic = document.getElementById("navProfile");
-
-    profilePic.src = user.profilePicUrl;
-    profileContainer.style.display = "inline-block";
-
-    // Optionally hide Login/Register links
-    document.getElementById("login-link").style.display = "none";
-    document.getElementById("register-link").style.display = "none";
-  }
-
-
 // 📚📕📕Notes pdf 
   const documentsBySubject = {
     ict: [
@@ -545,9 +515,7 @@ semesterSelect.addEventListener("change", function () {
     if (registerLink) registerLink.style.display = "none";
 
     profileContainer.style.display = "flex";
-    // profilePic.src = user.photoURL || "images/default-avatar.png";
-    profilePic.src = user.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${user.email}`;
-
+    profilePic.src = user.photoURL || "images/default-avatar.png";
   } else {
     profileContainer.style.display = "none";
     if (loginLink) loginLink.style.display = "inline";
@@ -583,114 +551,7 @@ semesterSelect.addEventListener("change", function () {
   });
 });
 
-
-// JS to handle picture upload 
-// document.getElementById('uploadForm').addEventListener('submit', async (e) => {
-//   e.preventDefault();
-
-//   const formData = new FormData(e.target);
-//   formData.append('userId', localStorage.getItem('userId'));
-
-//   const res = await fetch('/api/upload-profile', {
-//     method: 'POST',
-//     body: formData
-//   });
-
-//   const result = await res.json();
-//   if (res.ok) {
-//     alert('Upload successful!');
-//     document.getElementById('navProfile').src = result.profileImage;
-//   } else {
-//     alert(result.error || 'Upload failed.');
-//   }
-// });
-document.getElementById('uploadForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const userId = localStorage.getItem('userId');
-  const imageFile = document.getElementById('imageInput').files[0];
-
-  if (!userId || !imageFile) {
-    alert("User not logged in or no file selected");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append('image', imageFile);
-  formData.append('userId', userId);
-
-  try {
-    const response = await fetch('/api/upload-profile', {
-      method: 'POST',
-      body: formData
-    });
-
-    const result = await response.json(); // will throw error if response is not JSON
-
-    if (response.ok) {
-      console.log('Uploaded:', result.profileImage);
-      document.getElementById('profilePic').src = result.profileImage;
-    } else {
-      console.error('Upload failed:', result);
-      alert('Upload failed.');
-    }
-  } catch (err) {
-    console.error('Error:', err);
-    alert('Error uploading image');
-  }
-});
-
-
-// const userId = localStorage.getItem('userId');
-// fetch(`/api/user/${userId}`)
-//   .then(res => res.json())
-//   .then(user => {
-//     if (user.profileImage) {
-//       document.getElementById('navProfile').src = user.profileImage;
-//     }
-//   });
-
-(function () {
-  const userId = localStorage.getItem('userId');
-
-  if (!userId) {
-    console.warn('User ID not found in localStorage.');
-    window.location.href = '/login.html';
-    return; // ✅ now it's inside a function
-  }
-
-  fetch(`/api/user/${userId}`)
-    .then(res => res.json())
-    .then(user => {
-      if (user.profileImage) {
-        const profileImg = document.getElementById('navProfile');
-        if (profileImg) {
-          profileImg.src = user.profileImage;
-        } else {
-          console.warn('#navProfile element not found');
-        }
-      }
-    });
-})();
-
-
 </script>
 <!-- <script src="script.js"></script> -->
-
-
-  <!-- Login redirection fix -->
-  <script>
-    // Redirect to login page if not logged in and not already on login/registration pages
-    const allowedPaths = ['login.html', 'registration.html'];
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
-    if (!isLoggedIn) {
-      const currentPage = window.location.pathname.split('/').pop();
-      if (!allowedPaths.includes(currentPage)) {
-        window.location.href = 'login.html';
-      }
-    }
-  </script>
-
 </body>
 </html>
