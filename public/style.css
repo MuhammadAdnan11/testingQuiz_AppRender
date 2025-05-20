@@ -33,17 +33,7 @@ body.dark {
 }
 
 /* Header */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #007bff;
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+
 
 .logo {
   font-size: 1.5rem;
@@ -53,42 +43,48 @@ body.dark {
 }
 
 /* Navigation */
-/* .navbar {
-  display: flex;
-  gap: 1rem;
 
-  
-} */
- /* Fix navbar height */
-.navbar {
-  height: 25px; /* or whatever you want */
+
+
+/* Ensure navbar has a fixed height */
+.header {
+  height: 60px; /* adjust as needed */
   display: flex;
   align-items: center;
-  /* background-color: #123456; */
-   /* your desired navbar color */
+  justify-content: space-between;
+  background-color: #fff; /* or your preferred color */
   padding: 0 20px;
-  gap: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Profile container doesn't grow beyond navbar */
+/* Style the navbar links and layout */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Style for the profile container */
 .profile-container {
-  /* height: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  padding: 0;
-  margin: 0;
+  height: 100%;
 }
 
-/* Image styling */
-.profile-pic {
-  height: 40px;   /* max height inside navbar */
+/* Style for the profile image */
+#profile-pic {
   width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  display: block;
+  background: none;
+  border: 2px solid transparent;
 }
+#profile-pic:hover {
+  border-color: #007BFF; /* or any color you like */
+}
+
 
 
 .navbar a {
@@ -130,7 +126,7 @@ body.dark {
 
 /* Profile image container */
 
-/* Navbar profile image container - remove padding/margin and background */
+
 
 
 
