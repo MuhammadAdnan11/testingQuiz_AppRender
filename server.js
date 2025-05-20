@@ -13,7 +13,9 @@ const PORT = process.env.PORT || 5000; // Use Render’s dynamic port
 
 
 // const adminRoutes = require('./routes/admin');
-const adminRoute require('./routes/admin');
+
+const adminRoute = require('./routes/admin');
+
 app.use('/admin', adminRoutes);
 
 app.use('/css', express.static('public/admin/css'));
