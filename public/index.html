@@ -13,12 +13,12 @@
       window.location.href = "login.html";
     }
   </script> -->
-  <script>
+  <!-- <script>
   console.log("isLoggedIn in localStorage:", localStorage.getItem("isLoggedIn"));
   if (localStorage.getItem("isLoggedIn") !== "true") {
     window.location.href = "login.html";
   }
-</script>
+</script> -->
 
   <style>
     #quizSection {
@@ -343,6 +343,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const courseSelect = document.getElementById("course-select");
   const documentSection = document.getElementById("document-section");
   const documentLinks = document.getElementById("document-links");
+
+    // Display profile picture and toggle nav links based on login status
+  const user = JSON.parse(localStorage.getItem("quizUser"));
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  if (isLoggedIn && user && user.profilePicUrl) {
+    const profileContainer = document.getElementById("profile-container");
+    const profilePic = document.getElementById("navProfile");
+
+    profilePic.src = user.profilePicUrl;
+    profileContainer.style.display = "inline-block";
+
+    // Optionally hide Login/Register links
+    document.getElementById("login-link").style.display = "none";
+    document.getElementById("register-link").style.display = "none";
+  }
+
 
 // 📚📕📕Notes pdf 
   const documentsBySubject = {
