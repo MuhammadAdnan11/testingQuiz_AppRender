@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-// const User = require('./models/User');
+const User = require('./models/User');
  // Make sure this exists and is correctly defined
 require('dotenv').config();
 const User = require('./models/User');
@@ -22,8 +22,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // ✅ Serve static files from "public" folder
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ✅ Serve index.html on root route
 app.get('/', (req, res) => {
