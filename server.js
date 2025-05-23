@@ -17,8 +17,13 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
+// ✅ CORS (allow credentials + specific origin)
+app.use(cors({
+  origin: 'https://testingquiz-apprender.onrender.com', // Your frontend URL
+  credentials: true
+}));
+
 // ✅ Middleware
-app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -32,7 +37,8 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: false,
+    secure: true,             // ✅ Required for HTTPS (Render)
+    sameSite: 'None',         // ✅ Required for cross-site cookies
     maxAge: 1000 * 60 * 60 * 24, // 1 day
   },
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
@@ -112,7 +118,7 @@ app.post('/submit-score', async (req, res) => {
   }
 });
 
-// ✅ Admin Routes
+// ✅ Admin Routes (with middleware in admin.js)
 const adminRoutes = require('./routes/admin');
 app.use('/admin', adminRoutes);
 
