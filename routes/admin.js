@@ -1,7 +1,6 @@
 // routes/admin.js
 const express = require('express');
 const router = express.Router();
-// const isAdmin = require('../routes/isAdmin');
 const isAdmin = require('../models/isAdmin'); // ✅ Correct
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
@@ -9,6 +8,16 @@ const User = require('../models/User');
 const Quiz = require('../models/Quiz');
 const Result = require('../models/Result');
 
+// ✅ Route to get total number of users (students)
+router.get('/api/total-users', isAdmin, async (req, res) => {
+  try {
+    const count = await User.countDocuments({});
+    res.json({ totalUsers: count });
+  } catch (error) {
+    console.error('Error fetching user count:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 
 // Get all users
 router.get('/api/users', isAdmin, async (req, res) => {
