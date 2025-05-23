@@ -3,56 +3,52 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const bcrypt = require('bcrypt');
 const User = require('./models/User');
-
- // Make sure this exists and is correctly defined
 require('dotenv').config();
-// const User = require('./models/User');
 
 const app = express();
-const PORT = process.env.PORT || 5000; // Use Render’s dynamic port
+const PORT = process.env.PORT || 5000;
 
-
-// const adminRoutes = require('./routes/admin');
-// const adminRoutes = require('./routes/adminRoutes');  // adjust path if needed
-
-// const adminRoute = require('./routes/admin');
-
-// app.use('/admin', adminRoutes);
-
-// ✅ Only use one admin router
-const adminRoutes = require('./routes/admin'); // assuming your file is named admin.js
-app.use('/admin', adminRoutes);
-
-
-app.use('/css', express.static('public/admin/css'));
-app.use('/js', express.static('public/admin/js'));
-
-
-// ✅ Connect to MongoDB
+// ✅ MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
-
 // ✅ Middleware
 app.use(cors());
 app.use(bodyParser.json());
-
-// ✅ Serve static files from "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/css', express.static('public/admin/css'));
+app.use('/js', express.static('public/admin/js'));
 
-// ✅ Serve index.html on root route
+// ✅ Session Configuration (must come before routes)
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 24, // 1 day
+  },
+  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
+}));
+
+// ✅ Serve frontend index.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// ✅ User Registration Endpoint
+// ✅ Register Endpoint
 app.post('/register', async (req, res) => {
   const { fullName, email, password } = req.body;
   try {
-    const user = new User({ fullName, email, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ fullName, email, password: hashedPassword });
     await user.save();
     res.status(201).send({ message: 'User registered' });
   } catch (error) {
@@ -61,45 +57,37 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// ✅ User Login Endpoint
+// ✅ Login Endpoint (secure with bcrypt + session)
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
-    if (!user || user.password !== password) {
-      return res.status(401).send({ error: 'Invalid credentials' });
+
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
-    res.send({ message: 'Login successful' });
+
+    req.session.userId = user._id;
+    req.session.role = user.role;
+
+    res.status(200).json({
+      message: 'Logged in',
+      email: user.email,
+      role: user.role
+    });
   } catch (error) {
-    res.status(500).send({ error: 'Server error' });
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Server error during login' });
   }
 });
 
-
-
-// app.get('/score-history/:email', async (req, res) => {
-//   const { email } = req.params;
-
-//   try {
-//     const user = await User.findOne({ email });
-
-//     if (!user) return res.status(404).send({ error: 'User not found' });
-
-//     res.json({ quizAttempts: user.quizAttempts });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send({ error: 'Server error' });
-//   }
-// });
+// ✅ Score History Endpoint
 app.get('/score-history/:email', async (req, res) => {
   const { email } = req.params;
-
   try {
     const user = await User.findOne({ email });
-
     if (!user) return res.status(404).send({ error: 'User not found' });
 
-    // ✅ Send back quiz attempts as JSON
     res.json({ quizAttempts: user.quizAttempts });
   } catch (error) {
     console.error(error);
@@ -107,15 +95,13 @@ app.get('/score-history/:email', async (req, res) => {
   }
 });
 
-
+// ✅ Submit Quiz Score
 app.post('/submit-score', async (req, res) => {
   const { email, subject, score } = req.body;
-
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).send({ error: 'User not found' });
 
-    // ✅ Push new score into quizAttempts
     user.quizAttempts.push({ subject, score });
     await user.save();
 
@@ -126,46 +112,11 @@ app.post('/submit-score', async (req, res) => {
   }
 });
 
+// ✅ Admin Routes
+const adminRoutes = require('./routes/admin');
+app.use('/admin', adminRoutes);
 
-
-
-
-//   const { email, subject, score } = req.body;
-
-//   try {
-//     const user = await User.findOne({ email });
-//     if (!user) return res.status(404).send({ error: 'User not found' });
-
-//     user.quizAttempts.push({ subject, score }); // ← This adds a new attempt
-//     await user.save();
-
-//     res.send({ message: 'Score saved' });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send({ error: 'Failed to save score' });
-//   }
-// });
-
-
-
-
-//   const { email, subject, score } = req.body;
-
-//   try {
-//     const user = await User.findOne({ email });
-//     if (!user) return res.status(404).send({ error: 'User not found' });
-
-//     user.quizAttempts.push({ subject, score });
-//     await user.save();
-
-//     res.send({ message: 'Score saved' });
-//   } catch (error) {
-//     res.status(500).send({ error: 'Failed to save score' });
-//   }
-// });
-
-// ✅ Start server
+// ✅ Start Server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
-

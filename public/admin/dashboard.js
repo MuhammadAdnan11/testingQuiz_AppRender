@@ -10,12 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // ✅ Fetch and display total registered users
 async function fetchTotalUsers() {
   try {
-    const res = await fetch('/admin/api/total-users');
+    const res = await fetch('/admin/api/total-users', {
+      credentials: 'include'
+    });
     if (!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
 
     const data = await res.json();
     const section = document.querySelector('#users');
-    
+
     // Append total users count to the Manage Users section
     const total = document.createElement('p');
     total.textContent = `Total Registered Users: ${data.totalUsers || 0}`;
@@ -28,7 +30,9 @@ async function fetchTotalUsers() {
 // ✅ Fetch and display list of users
 async function fetchUsers() {
   try {
-    const res = await fetch('/admin/api/users');
+    const res = await fetch('/admin/api/users', {
+      credentials: 'include'
+    });
     if (!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
 
     const data = await res.json();
@@ -61,6 +65,7 @@ function setupQuizForm() {
       const res = await fetch('/admin/api/quizzes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ title, course })
       });
 
@@ -77,7 +82,9 @@ function setupQuizForm() {
 // ✅ Fetch and display quiz results
 async function fetchResults() {
   try {
-    const res = await fetch('/admin/api/results');
+    const res = await fetch('/admin/api/results', {
+      credentials: 'include'
+    });
     if (!res.ok) throw new Error('Failed to fetch results');
 
     const data = await res.json();
@@ -108,7 +115,8 @@ function setupUploadForm() {
     try {
       const res = await fetch('/admin/api/upload', {
         method: 'POST',
-        body: formData
+        body: formData,
+        credentials: 'include'
       });
 
       if (!res.ok) throw new Error('Failed to upload material');
