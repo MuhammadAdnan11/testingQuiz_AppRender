@@ -20,10 +20,18 @@ router.get('/api/total-users', isAdmin, async (req, res) => {
 });
 
 // Get all users
-router.get('/api/users', isAdmin, async (req, res) => {
+// router.get('/api/users', isAdmin, async (req, res) => {
+//   const users = await User.find({}, 'email role');
+//   res.json(users);
+// });
+
+
+// router.get('/api/users', isAdmin, async (req, res) => {
+router.get('/api/users', async (req, res) => {
   const users = await User.find({}, 'email role');
   res.json(users);
 });
+
 
 // Create quiz
 router.post('/api/quizzes', isAdmin, async (req, res) => {
@@ -51,16 +59,27 @@ router.post('/api/upload', isAdmin, upload.single('material'), (req, res) => {
 });
 
 // ✅ Total number of registered users
-router.get('/api/total-users', isAdmin, async (req, res) => {
+// router.get('/api/total-users', isAdmin, async (req, res) => {
+//   try {
+//     const count = await User.countDocuments({});
+//     res.json({ totalUsers: count });
+//   } catch (error) {
+//     console.error('Error fetching total users:', error);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+//   console.log('Fetching total user count...');
+
+// });
+
+// router.get('/api/total-users', isAdmin, async (req, res) => {
+router.get('/api/total-users', async (req, res) => {
   try {
     const count = await User.countDocuments({});
     res.json({ totalUsers: count });
   } catch (error) {
-    console.error('Error fetching total users:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Server error' });
   }
-  console.log('Fetching total user count...');
-
+  console.log('Fetching total user count..')
 });
 
 module.exports = router;
