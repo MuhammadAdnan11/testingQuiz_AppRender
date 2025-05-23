@@ -50,4 +50,17 @@ router.post('/api/upload', isAdmin, upload.single('material'), (req, res) => {
   res.status(200).json({ message: 'Uploaded' });
 });
 
+// ✅ Total number of registered users
+router.get('/api/total-users', isAdmin, async (req, res) => {
+  try {
+    const count = await User.countDocuments({});
+    res.json({ totalUsers: count });
+  } catch (error) {
+    console.error('Error fetching total users:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+  console.log('Fetching total user count...');
+
+});
+
 module.exports = router;
