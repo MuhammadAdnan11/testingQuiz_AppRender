@@ -12,46 +12,43 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ===== MONGODB CONNECTION =====
+// ===== MongoDB Connection =====
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB connected'))
-  .catch((err) => console.error('❌ MongoDB connection error:', err));
+  .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// ===== CORS CONFIG =====
-// Replace 'http://localhost:3000' with your actual frontend URL if different
-const corsOptions = {
-  origin: 'http://localhost:3000', // frontend origin
-  credentials: true,               // allow cookies to be sent
-};
-app.use(cors(corsOptions));
+// ===== CORS Configuration =====
+app.use(cors({
+  origin: 'http://localhost:3000', // Update to your frontend URL in production
+  credentials: true,
+}));
 
-// ===== MIDDLEWARES =====
+// ===== Middleware =====
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/css', express.static('public/admin/css'));
 app.use('/js', express.static('public/admin/js'));
 
-// ===== SESSION CONFIGURATION =====
+// ===== Session Configuration =====
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
     httpOnly: true,
-    secure: false,  // set to true if your site uses HTTPS
+    secure: false, // true if using HTTPS in production
     maxAge: 1000 * 60 * 60 * 24, // 1 day
   },
-  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
 }));
 
-// ===== ROUTES =====
-// Serve frontend index.html
+// ===== Serve Home Page =====
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// REGISTER
+// ===== Register Route =====
 app.post('/register', async (req, res) => {
   const { fullName, email, password } = req.body;
   try {
@@ -65,17 +62,15 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// LOGIN
+// ===== Login Route =====
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
-
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // Save session info here
     req.session.userId = user._id;
     req.session.role = user.role;
 
@@ -90,7 +85,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// SCORE HISTORY
+// ===== Score History Route =====
 app.get('/score-history/:email', async (req, res) => {
   const { email } = req.params;
   try {
@@ -104,7 +99,7 @@ app.get('/score-history/:email', async (req, res) => {
   }
 });
 
-// SUBMIT QUIZ SCORE
+// ===== Submit Score Route =====
 app.post('/submit-score', async (req, res) => {
   const { email, subject, score } = req.body;
   try {
@@ -121,11 +116,11 @@ app.post('/submit-score', async (req, res) => {
   }
 });
 
-// ===== ADMIN ROUTES =====
+// ===== Admin Routes (Protected) =====
 const adminRoutes = require('./routes/admin');
 app.use('/admin', adminRoutes);
 
-// ===== START SERVER =====
+// ===== Start Server =====
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

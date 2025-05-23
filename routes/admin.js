@@ -1,3 +1,5 @@
+// routes/admin.js
+
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -6,14 +8,12 @@ const upload = multer({ dest: 'uploads/' });
 const User = require('../models/User');
 const Quiz = require('../models/Quiz');
 const Result = require('../models/Result');
-// const isAdmin = require('../middleware/isAdmin'); // ✅ Corrected path for clarity
-const isAdmin = require('../models/isAdmin'); // ✅ Correct based on your project structure
+const isAdmin = require('../models/isAdmin'); // Correct path
 
-// ✅ Route: Get total number of registered users
+// GET: Total number of registered users
 router.get('/api/total-users', isAdmin, async (req, res) => {
   try {
     const count = await User.countDocuments({});
-    console.log('Total user count fetched:', count);
     res.json({ totalUsers: count });
   } catch (error) {
     console.error('Error fetching total users:', error);
@@ -21,7 +21,7 @@ router.get('/api/total-users', isAdmin, async (req, res) => {
   }
 });
 
-// ✅ Route: Get all users
+// GET: All users with email and role
 router.get('/api/users', isAdmin, async (req, res) => {
   try {
     const users = await User.find({}, 'email role');
@@ -32,7 +32,7 @@ router.get('/api/users', isAdmin, async (req, res) => {
   }
 });
 
-// ✅ Route: Create a new quiz
+// POST: Create a new quiz
 router.post('/api/quizzes', isAdmin, async (req, res) => {
   const { title, course } = req.body;
   try {
@@ -45,7 +45,7 @@ router.post('/api/quizzes', isAdmin, async (req, res) => {
   }
 });
 
-// ✅ Route: Get all quiz results
+// GET: All quiz results
 router.get('/api/results', isAdmin, async (req, res) => {
   try {
     const results = await Result.find()
@@ -55,7 +55,7 @@ router.get('/api/results', isAdmin, async (req, res) => {
     const formattedResults = results.map(r => ({
       email: r.user?.email || 'Unknown',
       score: r.score,
-      quizTitle: r.quiz?.title || 'Untitled'
+      quizTitle: r.quiz?.title || 'Untitled',
     }));
 
     res.json(formattedResults);
@@ -65,15 +65,14 @@ router.get('/api/results', isAdmin, async (req, res) => {
   }
 });
 
-// ✅ Route: Upload study materials
+// POST: Upload study materials
 router.post('/api/upload', isAdmin, upload.single('material'), (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
 
-    // Optionally: save file details to MongoDB
     res.status(200).json({
       message: 'Uploaded successfully',
-      filename: req.file.filename
+      filename: req.file.filename,
     });
   } catch (error) {
     console.error('Error during upload:', error);
