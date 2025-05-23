@@ -6,7 +6,8 @@ const upload = multer({ dest: 'uploads/' });
 const User = require('../models/User');
 const Quiz = require('../models/Quiz');
 const Result = require('../models/Result');
-const isAdmin = require('../middleware/isAdmin'); // ✅ Corrected path for clarity
+// const isAdmin = require('../middleware/isAdmin'); // ✅ Corrected path for clarity
+const isAdmin = require('../models/isAdmin'); // ✅ Correct based on your project structure
 
 // ✅ Route: Get total number of registered users
 router.get('/api/total-users', isAdmin, async (req, res) => {
