@@ -33,7 +33,7 @@
     </form>
   </div>
 
-  <script>
+  <!-- <script>
     document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -71,7 +71,49 @@
         alert("An error occurred. Please try again later.");
       }
     });
-  </script>
+  </script> -->
+
+<script>
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    try {
+      const res = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        // ✅ Save email + role in localStorage
+        localStorage.setItem('email', data.email);
+        localStorage.setItem('role', data.role);
+        localStorage.setItem('isLoggedIn', 'true');
+
+        // ✅ Optional: fallback avatar or profilePic if your backend returns it
+        // localStorage.setItem('profilePicUrl', data.profilePicUrl || 'https://i.pravatar.cc/40');
+
+        // ✅ Redirect based on role
+        if (data.role === 'admin') {
+          window.location.href = 'dashboard.html'; // Admin dashboard
+        } else {
+          window.location.href = 'index.html'; // Regular user main page
+        }
+      } else {
+        alert(data.error || 'Login failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('An error occurred. Please try again later.');
+    }
+  });
+</script>
+
 
 </body>
 </html>

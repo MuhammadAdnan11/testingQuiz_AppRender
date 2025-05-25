@@ -1,10 +1,11 @@
 // dashboard.js
 
-// Get logged-in email from localStorage
+// Get logged-in user info from localStorage
 const userEmail = localStorage.getItem('email') || '';
+const userRole = localStorage.getItem('role') || '';
 
-if (!userEmail) {
-  alert('You must be logged in to access the admin dashboard.');
+if (!userEmail || userRole !== 'admin') {
+  alert('You must be logged in as an admin to access the admin dashboard.');
   window.location.href = '/login.html'; // redirect to login
 }
 
