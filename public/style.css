@@ -1399,3 +1399,31 @@ label[for="course-select"] {
   margin-right: auto;
   text-align: left;
 }
+
+
+
+/* Gallery Style  */
+.gallery-section {
+    text-align: center;
+    padding: 2rem;
+}
+
+.event-buttons button {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.gallery-display {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.gallery-image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}

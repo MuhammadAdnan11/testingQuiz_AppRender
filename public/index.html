@@ -34,20 +34,8 @@
 
 </head>
 <body>
-  <!-- <header class="header">
-    <a href="#" class="logo">QuizMaster</a>
-    <button class="menu-toggle" id="menu-toggle">&#9776;</button>
-    <nav class="navbar">
-      <a href="./index.html" class="active">Home</a>
-      <a href="./about.html">About</a>
-    
-      <a href="./contact.html">Contact</a>
-    
-      <a href="./login.html">Login</a>
-      <a href="./registration.html">Register</a>
-    </nav>
-  </header> -->
-
+  
+  
   <header class="header">
   <a href="#" class="logo">QuizMaster</a>
   <button class="menu-toggle" id="menu-toggle">&#9776;</button>
@@ -252,6 +240,31 @@
   </div>
 </div>
 
+ <!-- Gallery Section -->
+<section id="gallery" class="gallery-section">
+    <h2>Event Gallery</h2>
+    <div class="event-buttons">
+        <button class="event-btn" data-event="annual-day">Annual Day</button>
+        <button class="event-btn" data-event="sports-day">Sports Day</button>
+        <button class="event-btn" data-event="science-fair">Science Fair</button>
+        <!-- Add more buttons as needed -->
+    </div>
+
+    <div class="gallery-display">
+        <div class="gallery-slideshow">
+            <img src="placeholder1.jpg" class="gallery-image" />
+            <img src="placeholder2.jpg" class="gallery-image" />
+            <img src="placeholder3.jpg" class="gallery-image" />
+        </div>
+    </div>
+
+    <button id="viewAllBtn">View All</button>
+</section>
+
+
+
+
+
 <!-- Testominals section  -->
 
 <section class="testimonials">
@@ -317,8 +330,9 @@
 
 
   <!-- Javascript portion from here  -->
-  <script src="questions.js"></script>
-  <!-- <script src="../script.js"></script> -->
+   <script src="./gallery.js"></script>
+  <script src="questions.js"></scrip>
+  <!-- <script src="../script.js"></script> 
 
   <script>
 document.addEventListener('DOMContentLoaded', () => {
