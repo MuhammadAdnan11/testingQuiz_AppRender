@@ -3,57 +3,56 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-const bcrypt = require('bcrypt');
 const User = require('./models/User');
+
+ // Make sure this exists and is correctly defined
 require('dotenv').config();
+// const User = require('./models/User');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; // Use Render’s dynamic port
 
-// ===== MongoDB Connection =====
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('✅ MongoDB connected'))
-  .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// ===== CORS Configuration =====
-app.use(cors({
-  origin: 'http://localhost:3000', // Update to your frontend URL in production
-  credentials: true,
-}));
+// const adminRoutes = require('./routes/admin');
+// const adminRoutes = require('./routes/adminRoutes');  // adjust path if needed
 
-// ===== Middleware =====
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// const adminRoute = require('./routes/admin');
+
+// app.use('/admin', adminRoutes);
+
+// ✅ Only use one admin router
+const adminRoutes = require('./routes/admin'); // assuming your file is named admin.js
+app.use('/admin', adminRoutes);
+
+
 app.use('/css', express.static('public/admin/css'));
 app.use('/js', express.static('public/admin/js'));
 
-// ===== Session Configuration =====
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
-  cookie: {
-    httpOnly: true,
-    secure: false, // true if using HTTPS in production
-    maxAge: 1000 * 60 * 60 * 24, // 1 day
-  },
-}));
 
-// ===== Serve Home Page =====
+// ✅ Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err));
+
+
+// ✅ Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+// ✅ Serve static files from "public" folder
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// ✅ Serve index.html on root route
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// ===== Register Route =====
+// ✅ User Registration Endpoint
 app.post('/register', async (req, res) => {
   const { fullName, email, password } = req.body;
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ fullName, email, password: hashedPassword });
+    const user = new User({ fullName, email, password });
     await user.save();
     res.status(201).send({ message: 'User registered' });
   } catch (error) {
@@ -62,36 +61,45 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// ===== Login Route =====
+// ✅ User Login Endpoint
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+    if (!user || user.password !== password) {
+      return res.status(401).send({ error: 'Invalid credentials' });
     }
-
-    req.session.userId = user._id;
-    req.session.role = user.role;
-
-    res.status(200).json({
-      message: 'Logged in',
-      email: user.email,
-      role: user.role,
-    });
+    res.send({ message: 'Login successful' });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ error: 'Server error during login' });
+    res.status(500).send({ error: 'Server error' });
   }
 });
 
-// ===== Score History Route =====
+
+
+// app.get('/score-history/:email', async (req, res) => {
+//   const { email } = req.params;
+
+//   try {
+//     const user = await User.findOne({ email });
+
+//     if (!user) return res.status(404).send({ error: 'User not found' });
+
+//     res.json({ quizAttempts: user.quizAttempts });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send({ error: 'Server error' });
+//   }
+// });
 app.get('/score-history/:email', async (req, res) => {
   const { email } = req.params;
+
   try {
     const user = await User.findOne({ email });
+
     if (!user) return res.status(404).send({ error: 'User not found' });
 
+    // ✅ Send back quiz attempts as JSON
     res.json({ quizAttempts: user.quizAttempts });
   } catch (error) {
     console.error(error);
@@ -99,13 +107,15 @@ app.get('/score-history/:email', async (req, res) => {
   }
 });
 
-// ===== Submit Score Route =====
+
 app.post('/submit-score', async (req, res) => {
   const { email, subject, score } = req.body;
+
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).send({ error: 'User not found' });
 
+    // ✅ Push new score into quizAttempts
     user.quizAttempts.push({ subject, score });
     await user.save();
 
@@ -116,11 +126,46 @@ app.post('/submit-score', async (req, res) => {
   }
 });
 
-// ===== Admin Routes (Protected) =====
-const adminRoutes = require('./routes/admin');
-app.use('/admin', adminRoutes);
 
-// ===== Start Server =====
+
+
+
+//   const { email, subject, score } = req.body;
+
+//   try {
+//     const user = await User.findOne({ email });
+//     if (!user) return res.status(404).send({ error: 'User not found' });
+
+//     user.quizAttempts.push({ subject, score }); // ← This adds a new attempt
+//     await user.save();
+
+//     res.send({ message: 'Score saved' });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send({ error: 'Failed to save score' });
+//   }
+// });
+
+
+
+
+//   const { email, subject, score } = req.body;
+
+//   try {
+//     const user = await User.findOne({ email });
+//     if (!user) return res.status(404).send({ error: 'User not found' });
+
+//     user.quizAttempts.push({ subject, score });
+//     await user.save();
+
+//     res.send({ message: 'Score saved' });
+//   } catch (error) {
+//     res.status(500).send({ error: 'Failed to save score' });
+//   }
+// });
+
+// ✅ Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+
