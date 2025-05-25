@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 // ✅ Import admin routes and adminAuth middleware
 const adminRoutes = require('./routes/admin'); // assuming routes/admin.js exists
-const adminAuth = require('./middleware/adminAuth'); // ← ADD THIS (new middleware)
+const adminAuth = require('./middleware/adminAuth'); // ← Admin middleware
 
 // ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
@@ -28,7 +28,7 @@ app.use('/js', express.static('public/admin/js'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// ✅ Serve index.html
+// ✅ Serve index.html at root
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -46,7 +46,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// ✅ User Login Endpoint
+// 🔑 Updated User Login Endpoint to include user role in response
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -54,7 +54,13 @@ app.post('/login', async (req, res) => {
     if (!user || user.password !== password) {
       return res.status(401).send({ error: 'Invalid credentials' });
     }
-    res.send({ message: 'Login successful' });
+
+    // Return email and role for frontend logic
+    res.json({
+      message: 'Login successful',
+      email: user.email,
+      role: user.role,  // <-- Make sure this field exists in your User model
+    });
   } catch (error) {
     res.status(500).send({ error: 'Server error' });
   }
