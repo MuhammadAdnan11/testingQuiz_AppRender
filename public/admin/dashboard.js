@@ -1,15 +1,44 @@
+// dashboard.js
 
-const res = await fetch('/admin/api/total-users', {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-    'x-user-email': localStorage.getItem('email')
+// Get logged-in email from localStorage
+const userEmail = localStorage.getItem('email') || '';
+
+if (!userEmail) {
+  alert('You must be logged in to access the admin dashboard.');
+  window.location.href = '/login.html'; // redirect to login
+}
+
+// Helper: Make fetch requests with email header
+function fetchWithEmail(url, options = {}) {
+  options.headers = {
+    ...(options.headers || {}),
+    'X-User-Email': userEmail,
+  };
+  return fetch(url, options);
+}
+
+// Check if current user is admin before loading dashboard
+async function checkAdmin() {
+  try {
+    const res = await fetchWithEmail('/admin/api/check-admin');
+    if (!res.ok) {
+      throw new Error(`Access denied: ${res.status}`);
+    }
+    const data = await res.json();
+    console.log('Admin check success:', data);
+    return true;
+  } catch (err) {
+    alert('Access denied. You must be an admin to view this page.');
+    window.location.href = '/login.html'; // or some other page
+    return false;
   }
-});
+}
 
+document.addEventListener('DOMContentLoaded', async () => {
+  const isAdmin = await checkAdmin();
+  if (!isAdmin) return;
 
-// Wait for DOM to load
-document.addEventListener('DOMContentLoaded', () => {
+  // Proceed with fetching dashboard data only if admin
   fetchTotalUsers();
   fetchUsers();
   setupQuizForm();
@@ -17,23 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
   setupUploadForm();
 });
 
-
-// Get logged-in email from localStorage
-const userEmail = localStorage.getItem('email') || '';
-
-if (!userEmail) {
-  alert('You must be logged in to access the admin dashboard.');
-  window.location.href = '/login.html'; // or wherever your login page is
-}
-
-// ✅ Fetch and display total registered users
+// Fetch total registered users
 async function fetchTotalUsers() {
   try {
-    const res = await fetch('/admin/api/total-users', {
-      headers: {
-        'X-User-Email': userEmail
-      }
-    });
+    const res = await fetchWithEmail('/admin/api/total-users');
     if (!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
 
     const data = await res.json();
@@ -47,14 +63,10 @@ async function fetchTotalUsers() {
   }
 }
 
-// ✅ Fetch and display list of users
+// Fetch and display users list
 async function fetchUsers() {
   try {
-    const res = await fetch('/admin/api/users', {
-      headers: {
-        'X-User-Email': userEmail
-      }
-    });
+    const res = await fetchWithEmail('/admin/api/users');
     if (!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
 
     const data = await res.json();
@@ -75,7 +87,7 @@ async function fetchUsers() {
   }
 }
 
-// ✅ Handle quiz creation form submission
+// Setup quiz creation form
 function setupQuizForm() {
   const form = document.getElementById('createQuizForm');
   form.addEventListener('submit', async (e) => {
@@ -84,13 +96,12 @@ function setupQuizForm() {
     const course = form.course.value.trim();
 
     try {
-      const res = await fetch('/admin/api/quizzes', {
+      const res = await fetchWithEmail('/admin/api/quizzes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-User-Email': userEmail
         },
-        body: JSON.stringify({ title, course })
+        body: JSON.stringify({ title, course }),
       });
 
       if (!res.ok) throw new Error('Failed to create quiz');
@@ -103,14 +114,10 @@ function setupQuizForm() {
   });
 }
 
-// ✅ Fetch and display quiz results
+// Fetch and display quiz results
 async function fetchResults() {
   try {
-    const res = await fetch('/admin/api/results', {
-      headers: {
-        'X-User-Email': userEmail
-      }
-    });
+    const res = await fetchWithEmail('/admin/api/results');
     if (!res.ok) throw new Error('Failed to fetch results');
 
     const data = await res.json();
@@ -130,7 +137,7 @@ async function fetchResults() {
   }
 }
 
-// ✅ Handle upload of study material
+// Setup upload form for study material
 function setupUploadForm() {
   const form = document.getElementById('uploadForm');
 
@@ -139,12 +146,9 @@ function setupUploadForm() {
 
     const formData = new FormData(form);
     try {
-      const res = await fetch('/admin/api/upload', {
+      const res = await fetchWithEmail('/admin/api/upload', {
         method: 'POST',
-        headers: {
-          'X-User-Email': userEmail
-        },
-        body: formData
+        body: formData,
       });
 
       if (!res.ok) throw new Error('Failed to upload material');

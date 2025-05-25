@@ -3,11 +3,17 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
+
 const User = require('../models/User');
 const Quiz = require('../models/Quiz');
 const Result = require('../models/Result');
 
-const adminAuth = require('../middleware/adminAuth'); // ✅ NEW: admin middleware
+const adminAuth = require('../middleware/adminAuth'); // Admin middleware
+
+// ✅ New route: Check if user is admin
+router.get('/api/check-admin', adminAuth, (req, res) => {
+  res.json({ message: 'User is admin', email: req.user.email });
+});
 
 // ✅ Get total number of users (students)
 router.get('/api/total-users', adminAuth, async (req, res) => {
