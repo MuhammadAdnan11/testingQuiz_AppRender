@@ -117,6 +117,9 @@ const galleryRoutes = require('./routes/gallery'); // <-- make sure this file ex
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const path = require('path');
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'public')));
 // ✅ Import admin routes and adminAuth middleware
 const adminRoutes = require('./routes/admin'); // assuming routes/admin.js exists
 const adminAuth = require('./middleware/adminAuth'); // ← Admin middleware
