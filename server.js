@@ -120,9 +120,6 @@ const PORT = process.env.PORT || 5000;
 const adminRoutes = require('./routes/admin'); // assuming routes/admin.js exists
 const adminAuth = require('./middleware/adminAuth'); // ← Admin middleware
 
-// ✅ Import gallery routes
-const galleryRoutes = require('./routes/gallery'); // <-- NEW
-
 // ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB connected'))
