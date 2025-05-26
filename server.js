@@ -112,6 +112,7 @@ const cors = require('cors');
 const path = require('path');
 const User = require('./models/User');
 require('dotenv').config();
+const galleryRoutes = require('./routes/gallery'); // <-- make sure this file exists
 
 const app = express();
 const PORT = process.env.PORT || 5000;
